@@ -11,7 +11,7 @@ import { AUTH_CHANGE_PASSWORD_FORM } from '@/features/auth/constants/auth-form.c
 import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 
 // Components
-import { AppInput, AppButton } from '@/features/app/components'
+import { AppInput, AppButton, useAppToast } from '@/features/app/components'
 
 // i18n
 import { useTranslation } from 'react-i18next'
@@ -22,6 +22,10 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 // Types
 import { IAuthChangePasswordForm } from '@/features/auth/types'
 import { TChangePasswordScreenProps } from '@/features/auth/screens/ChangePassword/types'
+
+// Redux
+import { useAuth_verifyMutation } from '@/features/auth/redux'
+import { E_AUTH_SIGN_TYPE } from '@/features/auth/constants'
 
 // Form Validation
 const formSchema = yup.object({
@@ -49,6 +53,12 @@ const ChangePasswordForm = memo(() => {
 	// Route
 	const route = useRoute<TChangePasswordScreenProps['route']>()
 
+	// RTK
+	const [verify, { isLoading: isVerifyLoading }] = useAuth_verifyMutation()
+
+	// Toast
+	const toast = useAppToast()
+
 	/**
 	 * @description Handle submit
 	 *
@@ -59,15 +69,29 @@ const ChangePasswordForm = memo(() => {
 	const onSubmit = useCallback(
 		async (form: IAuthChangePasswordForm): Promise<void> => {
 			try {
-				console.log('FORM', form)
-				console.log('route.params.token', route.params.token)
+				const token = route.params.token
+				const userId = route.params.userId
 
+				// Verify to change password
+				const verifyResponse = await verify({
+					params: { token },
+					body: {
+						signType: E_AUTH_SIGN_TYPE.FORGOT_PASSWORD,
+						userId,
+						password: form.password
+					}
+				}).unwrap()
+
+				// Navigate back to login
 				navigation.replace(E_AUTH_STACK_NAVIGATION.LOGIN)
+
+				// Show toast
+				toast.show({ description: verifyResponse.message })
 			} finally {
 				//
 			}
 		},
-		[route.params.token, navigation]
+		[route.params.token, route.params.userId, verify, navigation, toast]
 	)
 
 	return (
@@ -96,6 +120,7 @@ const ChangePasswordForm = memo(() => {
 				isDisabled={!isValid}
 				rounded={'50'}
 				onPress={handleSubmit(onSubmit)}
+				isLoading={isVerifyLoading}
 			>
 				{t('app.action.submit')}
 			</AppButton>

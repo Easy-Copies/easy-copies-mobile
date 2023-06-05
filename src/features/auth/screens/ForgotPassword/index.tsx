@@ -38,7 +38,7 @@ const ForgotPasswordScreen = memo(() => {
 						fontWeight={600}
 						lineHeight={17.5}
 					>
-						{t(`auth.title.changePasswordVerify`)}
+						{t(`auth.title.enterEmailForOtp`)}
 					</AppText>
 
 					{/* Form */}

@@ -37,7 +37,7 @@ export interface IAuthToken {
 	refreshToken: string
 }
 
-export interface IAuthRegister {
+export interface IAuthUser {
 	id: string
 	name: string
 	email: string

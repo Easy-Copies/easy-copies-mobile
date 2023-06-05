@@ -13,7 +13,7 @@ import {
 } from '@/features/app/navigations'
 import { TAuthStackNavigationParams } from '@/features/auth/navigations'
 
-export type TLoginProps = CompositeScreenProps<
+export type TLoginScreenProps = CompositeScreenProps<
 	NativeStackScreenProps<
 		TAuthStackNavigationParams,
 		E_AUTH_STACK_NAVIGATION.LOGIN

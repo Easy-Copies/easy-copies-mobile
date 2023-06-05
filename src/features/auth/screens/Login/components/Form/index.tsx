@@ -34,11 +34,12 @@ import {
 	useAuth_loginMutation,
 	useLazyAuth_meQuery,
 	auth_HANDLE_TOKENS,
-	auth_HANDLE_AUTHENTICATED
+	auth_HANDLE_AUTHENTICATED,
+	auth_HANDLE_AUTHENTICATED_USER
 } from '@/features/auth/redux'
 
 // Types
-import { TLoginProps } from '@/features/auth/screens/Login/types'
+import { TLoginScreenProps } from '@/features/auth/screens/Login/types'
 import { IAuthLoginForm } from '@/features/auth/types'
 
 // Form Validation
@@ -66,7 +67,7 @@ const LoginForm = memo(() => {
 	})
 
 	// Navigation
-	const navigation = useNavigation<TLoginProps['navigation']>()
+	const navigation = useNavigation<TLoginScreenProps['navigation']>()
 
 	// RTK
 	const [login, { isLoading: isLoginLoading }] = useAuth_loginMutation()
@@ -93,9 +94,8 @@ const LoginForm = memo(() => {
 				dispatch(auth_HANDLE_TOKENS(loginResponse.result))
 
 				// Get authenticated user
-				const {
-					result: { isUserVerified, id: userId }
-				} = await getAuthenticatedUser().unwrap()
+				const authenticatedUserResponse = await getAuthenticatedUser().unwrap()
+				const { id: userId, isUserVerified } = authenticatedUserResponse.result
 
 				// Check if user not active yet
 				if (!isUserVerified) {
@@ -109,6 +109,9 @@ const LoginForm = memo(() => {
 				// Check if user is active
 				if (isUserVerified) {
 					dispatch(auth_HANDLE_AUTHENTICATED(true))
+					dispatch(
+						auth_HANDLE_AUTHENTICATED_USER(authenticatedUserResponse.result)
+					)
 
 					// Redirect to entry point
 					navigation.navigate(E_APP_STACK_NAVIGATION.ENTRY_POINT)

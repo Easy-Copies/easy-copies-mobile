@@ -10,5 +10,5 @@ export type TAuthStackNavigationParams = {
 		userId: string
 	}
 	[E_AUTH_STACK_NAVIGATION.FORGOT_PASSWORD]: undefined
-	[E_AUTH_STACK_NAVIGATION.CHANGE_PASSWORD]: { token: string }
+	[E_AUTH_STACK_NAVIGATION.CHANGE_PASSWORD]: { token: string; userId: string }
 }

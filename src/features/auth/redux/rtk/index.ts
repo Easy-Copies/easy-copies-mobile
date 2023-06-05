@@ -7,6 +7,7 @@ import {
 	IAuthAttrsVerify
 } from '@/features/auth/types'
 import {
+	TAuthResponseUser,
 	TAuthResponseMe,
 	TAuthResponseNull,
 	TAuthResponseRegister,
@@ -33,7 +34,7 @@ export const authApi = emptySplitApi.injectEndpoints({
 			})
 		}),
 		auth_forgotPassword: builder.mutation<
-			TAuthResponseNull,
+			TAuthResponseUser,
 			IAuthAttrsForgotPassword
 		>({
 			query: ({ body }) => ({

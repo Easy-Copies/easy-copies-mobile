@@ -7,13 +7,27 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 // Constants
-import { AUTH_FORGOT_PASSWORD_FORM } from '@/features/auth/constants/auth-form.constant'
+import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
+import {
+	AUTH_FORGOT_PASSWORD_FORM,
+	E_AUTH_SIGN_TYPE
+} from '@/features/auth/constants'
 
 // Components
-import { AppInput, AppButton } from '@/features/app/components'
+import { AppInput, AppButton, useAppToast } from '@/features/app/components'
 
 // i18n
 import { useTranslation } from 'react-i18next'
+
+// Redux
+import { useAuth_forgotPasswordMutation } from '@/features/auth/redux'
+
+// Types
+import { TForgotPasswordScreenProps } from '@/features/auth/screens/ForgotPassword/types'
+import { IAuthForgotPasswordForm } from '@/features/auth/types'
+
+// React Navigation
+import { useNavigation } from '@react-navigation/native'
 
 // Form Validation
 const formSchema = yup.object({
@@ -35,18 +49,44 @@ const ForgotPasswordForm = memo(() => {
 		resolver: yupResolver(formSchema)
 	})
 
+	// RTK
+	const [forgotPassword, { isLoading: isForgotPasswordLoading }] =
+		useAuth_forgotPasswordMutation()
+
+	// Toast
+	const toast = useAppToast()
+
+	// Navigation
+	const navigation = useNavigation<TForgotPasswordScreenProps['navigation']>()
+
 	/**
 	 * @description Submit forgot password
 	 *
+	 * @param {IAuthForgotPasswordForm} form
+	 *
 	 * @return {Promise<void>} Promise<void>
 	 */
-	const onSubmit = useCallback(async (): Promise<void> => {
-		try {
-			//
-		} finally {
-			//
-		}
-	}, [])
+	const onSubmit = useCallback(
+		async (form: IAuthForgotPasswordForm): Promise<void> => {
+			try {
+				const forgotPasswordResponse = await forgotPassword({
+					body: form
+				}).unwrap()
+
+				// Navigate to OTP verify
+				navigation.navigate(E_AUTH_STACK_NAVIGATION.OTP_VERIFY, {
+					signType: E_AUTH_SIGN_TYPE.FORGOT_PASSWORD,
+					userId: forgotPasswordResponse.result.id
+				})
+
+				// Show toast
+				toast.show({ description: forgotPasswordResponse.message })
+			} catch (_) {
+				//
+			}
+		},
+		[forgotPassword, navigation, toast]
+	)
 
 	return (
 		<>
@@ -75,6 +115,7 @@ const ForgotPasswordForm = memo(() => {
 				isDisabled={!isValid}
 				rounded={'50'}
 				onPress={handleSubmit(onSubmit)}
+				isLoading={isForgotPasswordLoading}
 			>
 				{t('app.action.send')}
 			</AppButton>

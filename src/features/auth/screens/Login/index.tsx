@@ -13,7 +13,7 @@ import { AuthLayout } from '@/features/auth/components'
 import { LoginForm } from './components'
 
 // Types
-import { TLoginProps } from './types'
+import { TLoginScreenProps } from './types'
 
 // Constants
 import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
@@ -21,7 +21,7 @@ import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 // i18n
 import { useTranslation } from 'react-i18next'
 
-const LoginScreen = memo(({ navigation }: TLoginProps) => {
+const LoginScreen = memo(({ navigation }: TLoginScreenProps) => {
 	// Translation
 	const { t } = useTranslation()
 

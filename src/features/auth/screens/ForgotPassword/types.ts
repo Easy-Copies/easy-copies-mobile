@@ -13,7 +13,7 @@ import {
 } from '@/features/app/navigations'
 import { TAuthStackNavigationParams } from '@/features/auth/navigations'
 
-export type TForgotPasswordProps = CompositeScreenProps<
+export type TForgotPasswordScreenProps = CompositeScreenProps<
 	NativeStackScreenProps<
 		TAuthStackNavigationParams,
 		E_AUTH_STACK_NAVIGATION.FORGOT_PASSWORD

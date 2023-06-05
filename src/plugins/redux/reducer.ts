@@ -26,7 +26,7 @@ const app = persistReducer(appPersistConfig, appReducer)
 const authPersistConfig = {
 	key: 'auth',
 	storage: AsyncStorage,
-	whitelist: ['isAuthenticated', 'token', 'refreshToken']
+	whitelist: ['isAuthenticated', 'tokens', 'authenticatedUser']
 }
 const auth = persistReducer(authPersistConfig, authReducer)
 

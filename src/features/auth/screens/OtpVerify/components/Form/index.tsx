@@ -88,7 +88,13 @@ const OtpVerifyForm = memo(() => {
 					return
 				}
 
-				navigation.navigate(E_AUTH_STACK_NAVIGATION.CHANGE_PASSWORD, { token })
+				// Check if user want to change password
+				if (route.params.signType === E_AUTH_SIGN_TYPE.FORGOT_PASSWORD) {
+					navigation.navigate(E_AUTH_STACK_NAVIGATION.CHANGE_PASSWORD, {
+						token,
+						userId
+					})
+				}
 			} finally {
 				//
 			}
