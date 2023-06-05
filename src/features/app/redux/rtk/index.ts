@@ -27,6 +27,7 @@ const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: API_BASE,
+	timeout: 5000,
 	prepareHeaders(headers, { getState }) {
 		const rootState = getState() as IRootState
 		const token = rootState.auth.tokens.token

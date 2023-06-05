@@ -12,7 +12,7 @@ import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 import { E_AUTH_SIGN_TYPE } from '@/features/auth/constants'
 
 // Components
-import { AppInput, AppButton } from '@/features/app/components'
+import { AppInput, AppButton, useAppToast } from '@/features/app/components'
 
 // i18n
 import { useTranslation } from 'react-i18next'
@@ -56,6 +56,9 @@ const RegisterForm = memo(() => {
 	// Navigation
 	const navigation = useNavigation<TRegisterScreenProps['navigation']>()
 
+	// Toast
+	const toast = useAppToast()
+
 	/**
 	 * @description Handle submit
 	 *
@@ -74,11 +77,14 @@ const RegisterForm = memo(() => {
 					signType: E_AUTH_SIGN_TYPE.VERIFY_USER,
 					userId: registerResponse.result.id
 				})
+
+				// Show Toast
+				toast.show({ description: registerResponse.message })
 			} catch (_) {
 				//
 			}
 		},
-		[register, navigation]
+		[register, navigation, toast]
 	)
 
 	return (

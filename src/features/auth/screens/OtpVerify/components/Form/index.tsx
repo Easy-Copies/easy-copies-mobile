@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 // Components
-import { AppInput, AppButton } from '@/features/app/components'
+import { AppInput, AppButton, useAppToast } from '@/features/app/components'
 
 // i18n
 import { useTranslation } from 'react-i18next'
@@ -54,6 +54,9 @@ const OtpVerifyForm = memo(() => {
 	// Route
 	const route = useRoute<TOtpVerifyScreenProps['route']>()
 
+	// Toast
+	const toast = useAppToast()
+
 	/**
 	 * @description Handle submit
 	 *
@@ -71,13 +74,16 @@ const OtpVerifyForm = memo(() => {
 				// Check if user is login but user not active yet
 				if (route.params.signType === E_AUTH_SIGN_TYPE.VERIFY_USER) {
 					// Verify user
-					await verify({
+					const verifyResponse = await verify({
 						params: { token },
 						body: { signType, userId }
 					}).unwrap()
 
 					// Redirect back to login
 					navigation.navigate(E_AUTH_STACK_NAVIGATION.LOGIN)
+
+					// Show Toast
+					toast.show({ description: verifyResponse.message })
 
 					return
 				}
@@ -87,7 +93,7 @@ const OtpVerifyForm = memo(() => {
 				//
 			}
 		},
-		[navigation, verify, route.params.signType, route.params.userId]
+		[navigation, verify, route.params.signType, route.params.userId, toast]
 	)
 
 	return (

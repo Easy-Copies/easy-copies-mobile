@@ -2,7 +2,7 @@
 import { memo } from 'react'
 
 // Native Base
-import { Row, Column, Alert } from 'native-base'
+import { Row, Column, Alert, useToast } from 'native-base'
 
 // Types
 import { TAppToastProps } from './types'
@@ -11,13 +11,18 @@ import { TAppToastProps } from './types'
 import { AppText } from '@/features/app/components/Text'
 
 const AppToast = memo(
-	({ status, variant, title, description }: TAppToastProps) => {
+	({
+		status = 'success',
+		variant = 'top-accent',
+		title = 'Success',
+		description
+	}: TAppToastProps) => {
 		return (
 			<Alert
 				maxWidth='100%'
 				alignSelf='center'
 				flexDirection='row'
-				status={status ? status : 'info'}
+				status={status}
 				variant={variant}
 				marginX={20}
 			>
@@ -64,6 +69,18 @@ const AppToast = memo(
 	}
 )
 
+const useAppToast = () => {
+	const toast = useToast()
+
+	return {
+		show: (props: TAppToastProps) =>
+			toast.show({
+				render: () => <AppToast {...props} />,
+				placement: 'top-right'
+			})
+	}
+}
+
 AppToast.displayName = 'AppToast'
 
-export { AppToast }
+export { AppToast, useAppToast }
