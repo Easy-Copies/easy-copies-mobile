@@ -8,12 +8,19 @@ import * as yup from 'yup'
 
 // Constants
 import { AUTH_LOGIN_FORM } from '@/features/auth/constants/auth-form.constant'
+import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 
 // Components
 import { AppInput, AppText, AppButton } from '@/features/app/components'
 
 // i18n
 import { useTranslation } from 'react-i18next'
+
+// React Navigation
+import { useNavigation } from '@react-navigation/native'
+
+// Types
+import { TLoginProps } from '@/features/auth/screens/Login/types'
 
 // Form Validation
 const formSchema = yup.object({
@@ -34,6 +41,9 @@ const LoginForm = memo(() => {
 		mode: 'all',
 		resolver: yupResolver(formSchema)
 	})
+
+	// Navigation
+	const navigation = useNavigation<TLoginProps['navigation']>()
 
 	return (
 		<>
@@ -79,6 +89,9 @@ const LoginForm = memo(() => {
 				fontSize={14}
 				fontWeight={600}
 				lineHeight={17.5}
+				onPress={() =>
+					navigation.navigate(E_AUTH_STACK_NAVIGATION.FORGOT_PASSWORD)
+				}
 			>
 				{t('auth.title.forgotPassword')}
 			</AppText>
@@ -88,6 +101,7 @@ const LoginForm = memo(() => {
 				backgroundColor={'secondary.400'}
 				marginTop={3}
 				isDisabled={!isValid}
+				rounded={'50'}
 			>
 				{t('auth.menu.login')}
 			</AppButton>

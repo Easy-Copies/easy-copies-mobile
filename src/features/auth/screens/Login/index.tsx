@@ -15,9 +15,6 @@ import { LoginForm } from './components'
 // Types
 import { TLoginProps } from './types'
 
-// Native Base
-import { Row, Column } from 'native-base'
-
 // Constants
 import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 
@@ -62,11 +59,15 @@ const LoginScreen = memo(({ navigation }: TLoginProps) => {
 					{/* Register Button */}
 					<AppView justifyContent={'center'} alignItems={'center'}>
 						<AppButton
-							backgroundColor={'secondary.400'}
 							width={155}
 							onPress={() =>
 								navigation.navigate(E_AUTH_STACK_NAVIGATION.REGISTER)
 							}
+							rounded={'50'}
+							_text={{
+								color: 'secondary.400'
+							}}
+							variant={'outline'}
 						>
 							{t('auth.menu.register')}
 						</AppButton>

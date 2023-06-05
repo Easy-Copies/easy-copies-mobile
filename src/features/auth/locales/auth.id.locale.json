@@ -4,17 +4,21 @@
 			"login": "Masuk",
 			"register": "Daftar",
 			"forgotPassword": "Lupa Password",
-			"changePassword": "Ganti Password"
+			"changePassword": "Ganti Password",
+			"verifyOtp": "Verifikasi OTP"
 		},
 		"form": {
 			"name": "Nama",
 			"email": "Email",
-			"password": "Kata Sandi"
+			"password": "Kata Sandi",
+			"otp": "OTP"
 		},
 		"title": {
 			"forgotPassword": "Lupa Password?",
 			"doesntHaveAccount": "Belum Punya Akun? Daftar Sekarang",
-			"alreadyHaveAccount": "Sudah Punya Akun? Masuk Sekarang"
+			"alreadyHaveAccount": "Sudah Punya Akun? Masuk Sekarang",
+			"enterEmailForOtp": "Masukkan alamat email untuk menerima OTP",
+			"changePasswordVerify": "Cek email anda, lalu masukkan kode OTP yang diterima untuk mereset password anda."
 		}
 	}
 }

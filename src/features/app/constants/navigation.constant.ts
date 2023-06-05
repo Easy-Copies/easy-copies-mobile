@@ -15,7 +15,8 @@ export enum E_AUTH_STACK_NAVIGATION {
 	LOGIN = 'Login',
 	REGISTER = 'Register',
 	FORGOT_PASSWORD = 'ForgotPassword',
-	CHANGE_PASSWORD = 'ChangePassword'
+	CHANGE_PASSWORD = 'ChangePassword',
+	OTP_VERIFY = 'OtpVerify'
 }
 
 export enum E_HOME_STACK_NAVIGATION {

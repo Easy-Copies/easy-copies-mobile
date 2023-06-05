@@ -4,17 +4,21 @@
 			"login": "Login",
 			"register": "Register",
 			"forgotPassword": "Forgot Password",
-			"changePassword": "Change Password"
+			"changePassword": "Change Password",
+			"verifyOtp": "OTP Verification"
 		},
 		"form": {
 			"name": "Name",
 			"email": "Email",
-			"password": "Password"
+			"password": "Password",
+			"otp": "OTP"
 		},
 		"title": {
 			"forgotPassword": "Forgot Password?",
 			"doesntHaveAccount": "Doesn't Have an Account? Register Now",
-			"alreadyHaveAccount": "Already Have an Account? Login Now"
+			"alreadyHaveAccount": "Already Have an Account? Login Now",
+			"enterEmailForOtp": "Enter email for receiving OTP",
+			"changePasswordVerify": "Please check your email for OTP code"
 		}
 	}
 }

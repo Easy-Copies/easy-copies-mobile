@@ -13,10 +13,7 @@ import { AuthLayout } from '@/features/auth/components'
 import { RegisterForm } from './components'
 
 // Types
-import { TRegisterProps } from './types'
-
-// Native Base
-import { Row, Column } from 'native-base'
+import { TRegisterScreenProps } from './types'
 
 // Constants
 import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
@@ -24,7 +21,7 @@ import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 // i18n
 import { useTranslation } from 'react-i18next'
 
-const RegisterScreen = memo(({ navigation }: TRegisterProps) => {
+const RegisterScreen = memo(({ navigation }: TRegisterScreenProps) => {
 	// Translation
 	const { t } = useTranslation()
 
@@ -62,9 +59,13 @@ const RegisterScreen = memo(({ navigation }: TRegisterProps) => {
 					{/* Login Button */}
 					<AppView justifyContent={'center'} alignItems={'center'}>
 						<AppButton
-							backgroundColor={'secondary.400'}
 							width={155}
 							onPress={() => navigation.navigate(E_AUTH_STACK_NAVIGATION.LOGIN)}
+							rounded={'50'}
+							_text={{
+								color: 'secondary.400'
+							}}
+							variant={'outline'}
 						>
 							{t('auth.menu.login')}
 						</AppButton>

@@ -1,73 +1,85 @@
-// Redux Toolkit
-import { fetchBaseQuery, createApi } from '@reduxjs/toolkit/query/react'
+// Interfaces
+import {
+	IAuthAttrsForgotPassword,
+	IAuthAttrsLogin,
+	IAuthAttrsRefreshToken,
+	IAuthAttrsRegister,
+	IAuthAttrsVerify
+} from '@/features/auth/types'
+import {
+	TAuthResponseMe,
+	TAuthResponseNull,
+	TAuthResponseRegister,
+	TAuthResponseToken
+} from '@/features/auth/types/response.type'
 
-// Env
-import { API_BASE } from '@env'
+// Rtk
+import { emptySplitApi } from '@/features/app/redux'
 
-// Plugins
-// import { IRootState } from '@/plugins/redux/reducer'
-
-const baseQuery = fetchBaseQuery({
-	baseUrl: API_BASE,
-	prepareHeaders(headers) {
-		// const rootState = getState() as IRootState
-
-		// Handle if you have any header send to the server
-		// if (rootState.auth.auth_token.token) {
-		//   headers.set('Authorization', `Bearer ${rootState.auth.auth_token.token}`)
-		// }
-
-		return headers
-	}
+export const authApi = emptySplitApi.injectEndpoints({
+	endpoints: builder => ({
+		auth_login: builder.mutation<TAuthResponseToken, IAuthAttrsLogin>({
+			query: ({ body }) => ({
+				url: '/v1/auth/login',
+				method: 'POST',
+				body
+			})
+		}),
+		auth_register: builder.mutation<TAuthResponseRegister, IAuthAttrsRegister>({
+			query: ({ body }) => ({
+				url: '/v1/auth/register',
+				method: 'POST',
+				body
+			})
+		}),
+		auth_forgotPassword: builder.mutation<
+			TAuthResponseNull,
+			IAuthAttrsForgotPassword
+		>({
+			query: ({ body }) => ({
+				url: '/v1/auth/forgot-password',
+				method: 'POST',
+				body
+			})
+		}),
+		auth_refreshToken: builder.mutation<
+			TAuthResponseToken,
+			IAuthAttrsRefreshToken
+		>({
+			query: ({ body }) => ({
+				url: '/v1/auth/refresh-token',
+				method: 'POST',
+				body
+			})
+		}),
+		auth_me: builder.query<TAuthResponseMe, void>({
+			query: () => ({
+				url: '/v1/auth/me'
+			})
+		}),
+		auth_verify: builder.mutation<TAuthResponseNull, IAuthAttrsVerify>({
+			query: ({ params, body }) => ({
+				url: `/v1/auth/verify/${params.token}`,
+				method: 'POST',
+				body
+			})
+		}),
+		auth_logout: builder.mutation<TAuthResponseNull, void>({
+			query: () => ({
+				url: '/v1/auth/logout',
+				method: 'POST'
+			})
+		})
+	}),
+	overrideExisting: false
 })
 
-/* NOTE: Open this if u want to refresh token */
-// const baseQueryWithReauth: BaseQueryFn<
-//   string | FetchArgs,
-//   unknown,
-//   FetchBaseQueryError
-// > = async (args, api, extraOptions) => {
-//   // wait until the mutex is available without locking it
-//   await mutex.waitForUnlock()
-//   let result = await baseQuery(args, api, extraOptions)
-//   if (result.error && result.error.status === 401) {
-//     // checking whether the mutex is locked
-//     if (!mutex.isLocked()) {
-//       const release = await mutex.acquire()
-//       try {
-//         const refreshResult = (await baseQuery(
-//           '/auth/refresh-token',
-//           api,
-//           extraOptions
-//         )) as { data: IAuthResponseToken }
-
-//         if (refreshResult.data) {
-//           api.dispatch(auth_SET_TOKEN(refreshResult.data?.result))
-
-//           // retry the initial query
-//           result = await baseQuery(args, api, extraOptions)
-//         } else {
-//           api.dispatch(auth_LOGOUT())
-//         }
-//       } catch (_) {
-//         api.dispatch(auth_LOGOUT())
-//       } finally {
-//         // release must be called once the mutex should be released again.
-//         release()
-//       }
-//     } else {
-//       // wait until the mutex is available without locking it
-//       await mutex.waitForUnlock()
-//       result = await baseQuery(args, api, extraOptions)
-//     }
-//   }
-
-//   return result
-// }
-
-export const emptySplitApi = createApi({
-	// If you want to use interceptor
-	// baseQuery: baseQueryWithReauth,
-	baseQuery,
-	endpoints: () => ({})
-})
+export const {
+	useAuth_loginMutation,
+	useAuth_registerMutation,
+	useAuth_forgotPasswordMutation,
+	useAuth_refreshTokenMutation,
+	useLazyAuth_meQuery,
+	useAuth_verifyMutation,
+	useAuth_logoutMutation
+} = authApi

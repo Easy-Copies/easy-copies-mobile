@@ -1,10 +1,8 @@
 // Interfaces
-// import { IAppResponse, IAppResponsePagination } from '@/features/app/interfaces'
-import { ITodo } from './auth.type'
+import { IAppResponse } from '@/features/app/types'
+import { IAuth, IAuthRegister, IAuthToken } from './auth.type'
 
-// NOTE: If you integrating to BE, recommended to use response wrapper
-// export type ITodoResponseList = IAppResponsePagination<ITodo[]>
-// export type ITodoResponseDetail = IAppResponse<ITodo>
-
-export type ITodoResponseList = ITodo[]
-export type ITodoResponseDetail = ITodo
+export type TAuthResponseToken = IAppResponse<IAuthToken>
+export type TAuthResponseRegister = IAppResponse<IAuthRegister>
+export type TAuthResponseMe = IAppResponse<IAuth>
+export type TAuthResponseNull = IAppResponse<null>

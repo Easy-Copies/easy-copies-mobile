@@ -36,7 +36,11 @@ const authSlice = createSlice({
 })
 
 // Actions / Mutations
-export const { auth_HANDLE_AUTHENTICATED } = authSlice.actions
+export const {
+	auth_HANDLE_AUTHENTICATED,
+	auth_HANDLE_TOKENS,
+	auth_HANDLE_LOGOUT
+} = authSlice.actions
 
 // Getters
 export const authGetIsAuthenticated = (state: IRootState) =>

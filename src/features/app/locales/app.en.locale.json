@@ -33,7 +33,8 @@
 			"submit": "Submit",
 			"cancel": "Cancel",
 			"update": "Update",
-			"delete": "Delete"
+			"delete": "Delete",
+			"send": "Send"
 		},
 		"confirmation": {
 			"areYouSure": "Are You sure?"

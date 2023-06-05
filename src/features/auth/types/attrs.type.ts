@@ -1,20 +1,29 @@
-export interface ITodoAttrsIndex {
-	params?: { _limit?: number }
+// Types
+import {
+	IAuthForgotPasswordForm,
+	IAuthLoginForm,
+	IAuthRefreshTokenForm,
+	IAuthRegisterForm,
+	IAuthVerifyForm
+} from './auth.type'
+
+export interface IAuthAttrsLogin {
+	body: IAuthLoginForm
 }
 
-export interface ITodoAttrsStore {
-	body: { title: string; completed: boolean }
+export interface IAuthAttrsRegister {
+	body: IAuthRegisterForm
 }
 
-export interface ITodoAttrsShow {
-	params: { id: number }
+export interface IAuthAttrsForgotPassword {
+	body: IAuthForgotPasswordForm
 }
 
-export interface ITodoAttrsUpdate {
-	params: { id: number }
-	body: { title: string; completed: boolean }
+export interface IAuthAttrsRefreshToken {
+	body: IAuthRefreshTokenForm
 }
 
-export interface ITodoAttrsDestroy {
-	params: { id: number }
+export interface IAuthAttrsVerify {
+	params: { token: string }
+	body: IAuthVerifyForm
 }

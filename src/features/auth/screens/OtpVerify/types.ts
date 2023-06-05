@@ -13,10 +13,10 @@ import {
 } from '@/features/app/navigations'
 import { TAuthStackNavigationParams } from '@/features/auth/navigations'
 
-export type TRegisterScreenProps = CompositeScreenProps<
+export type TOtpVerifyScreenProps = CompositeScreenProps<
 	NativeStackScreenProps<
 		TAuthStackNavigationParams,
-		E_AUTH_STACK_NAVIGATION.REGISTER
+		E_AUTH_STACK_NAVIGATION.OTP_VERIFY
 	>,
 	CompositeScreenProps<
 		NativeStackScreenProps<TAppRootStackNavigationParams>,

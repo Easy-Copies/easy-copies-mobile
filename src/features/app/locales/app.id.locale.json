@@ -33,7 +33,8 @@
 			"submit": "Kirim",
 			"cancel": "Batal",
 			"update": "Perbaharui",
-			"delete": "Hapus"
+			"delete": "Hapus",
+			"send": "Kirim"
 		},
 		"confirmation": {
 			"areYouSure": "Apakah Anda yakin?"

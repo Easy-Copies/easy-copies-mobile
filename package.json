@@ -33,6 +33,7 @@
 		"@react-navigation/native": "^6.1.6",
 		"@react-navigation/native-stack": "^6.9.12",
 		"@reduxjs/toolkit": "^1.9.3",
+		"async-mutex": "^0.4.0",
 		"i18next": "^22.4.11",
 		"lodash.omit": "^4.5.0",
 		"native-base": "^3.4.28",
