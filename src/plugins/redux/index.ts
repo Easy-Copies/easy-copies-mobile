@@ -36,6 +36,9 @@ import { emptySplitApi } from '@/features/app/redux'
 // Env
 import { NODE_ENV } from '@env'
 
+// Middleware
+import { middlewareError } from './middleware'
+
 // Persist Config
 const persistConfig = {
 	key: appName,
@@ -58,7 +61,7 @@ const store = configureStore({
 			}
 		})
 			.prepend(listenerMiddleware.middleware)
-			.concat(emptySplitApi.middleware)
+			.concat(middlewareError, emptySplitApi.middleware)
 
 		// Flipper debugger (for development purpose only)
 		if (NODE_ENV !== 'test' && NODE_ENV === 'development') {

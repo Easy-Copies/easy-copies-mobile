@@ -11,3 +11,10 @@ export interface IAppResponsePagination<T extends unknown[]> {
 	status: number
 	result: IAppCommonPagination<T>
 }
+
+export interface IAppResponseError {
+	errors: {
+		message: string
+		field?: string
+	}[]
+}
