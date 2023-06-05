@@ -2,7 +2,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // Auth Screens
-import { LoginScreen } from '@/features/auth/screens'
+import { LoginScreen, RegisterScreen } from '@/features/auth/screens'
 
 // Constants
 import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
@@ -20,6 +20,10 @@ const AuthStackNavigation = (): JSX.Element => {
 			<Stack.Screen
 				name={E_AUTH_STACK_NAVIGATION.LOGIN}
 				component={LoginScreen}
+			/>
+			<Stack.Screen
+				name={E_AUTH_STACK_NAVIGATION.REGISTER}
+				component={RegisterScreen}
 			/>
 		</Stack.Navigator>
 	)

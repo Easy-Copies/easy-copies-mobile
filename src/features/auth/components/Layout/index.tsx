@@ -18,7 +18,7 @@ const AuthLayout = memo(({ children }: TAuthLayoutProps) => {
 				alignItems={'center'}
 				justifyContent={'center'}
 				w={'100%'}
-				h='1/3'
+				h='1/5'
 			>
 				<StyledEasyCopiesImage />
 			</Column>

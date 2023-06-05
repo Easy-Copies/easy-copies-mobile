@@ -7,12 +7,14 @@
 			"changePassword": "Change Password"
 		},
 		"form": {
+			"name": "Name",
 			"email": "Email",
 			"password": "Password"
 		},
 		"title": {
 			"forgotPassword": "Forgot Password?",
-			"doesntHaveAccount": "Doesn't Have an Account? Register Now"
+			"doesntHaveAccount": "Doesn't Have an Account? Register Now",
+			"alreadyHaveAccount": "Already Have an Account? Login Now"
 		}
 	}
 }

@@ -61,8 +61,8 @@
 			"invalid": "Input tidak valid",
 			"invalidType": "Harus bertipe {{type}}",
 			"required": "{{field}} harus diisi",
-			"stringMin": "Minimal {{min}} karakter",
-			"stringMax": "Maksimal {{max}} karakter"
+			"stringMin": "{{field}} minimal {{min}} karakter",
+			"stringMax": "{{field}} maksimal {{max}} karakter"
 		}
 	}
 }

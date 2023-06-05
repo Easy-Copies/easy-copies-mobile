@@ -7,21 +7,22 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 // Constants
-import { AUTH_LOGIN_FORM } from '@/features/auth/constants/auth-form.constant'
+import { AUTH_REGISTER_FORM } from '@/features/auth/constants/auth-form.constant'
 
 // Components
-import { AppInput, AppText, AppButton } from '@/features/app/components'
+import { AppInput, AppButton } from '@/features/app/components'
 
 // i18n
 import { useTranslation } from 'react-i18next'
 
 // Form Validation
 const formSchema = yup.object({
+	name: yup.string().required(),
 	email: yup.string().email().required(),
-	password: yup.string().required()
+	password: yup.string().required().min(8)
 })
 
-const LoginForm = memo(() => {
+const RegisterForm = memo(() => {
 	// Translation
 	const { t } = useTranslation()
 
@@ -30,13 +31,29 @@ const LoginForm = memo(() => {
 		control,
 		formState: { errors, isValid }
 	} = useForm({
-		defaultValues: AUTH_LOGIN_FORM,
+		defaultValues: AUTH_REGISTER_FORM,
 		mode: 'all',
 		resolver: yupResolver(formSchema)
 	})
 
 	return (
 		<>
+			{/* Name */}
+			<Controller
+				control={control}
+				name='name'
+				render={({ field: { onChange, ...fieldRest } }) => {
+					return (
+						<AppInput
+							{...fieldRest}
+							error={errors.name}
+							onChangeText={onChange}
+							inputLabel={'auth.form.name'}
+						/>
+					)
+				}}
+			/>
+
 			{/* Email */}
 			<Controller
 				control={control}
@@ -72,29 +89,18 @@ const LoginForm = memo(() => {
 				}}
 			/>
 
-			{/* Forgot Password */}
-			<AppText
-				textAlign={'right'}
-				marginTop={1}
-				fontSize={14}
-				fontWeight={600}
-				lineHeight={17.5}
-			>
-				{t('auth.title.forgotPassword')}
-			</AppText>
-
-			{/* Login Button */}
+			{/* Register Button */}
 			<AppButton
 				backgroundColor={'secondary.400'}
 				marginTop={3}
 				isDisabled={!isValid}
 			>
-				{t('auth.menu.login')}
+				{t('auth.menu.register')}
 			</AppButton>
 		</>
 	)
 })
 
-LoginForm.displayName = 'LoginForm'
+RegisterForm.displayName = 'RegisterForm'
 
-export { LoginForm }
+export { RegisterForm }

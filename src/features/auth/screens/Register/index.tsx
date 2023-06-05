@@ -10,10 +10,10 @@ import {
 	AppButton
 } from '@/features/app/components'
 import { AuthLayout } from '@/features/auth/components'
-import { LoginForm } from './components'
+import { RegisterForm } from './components'
 
 // Types
-import { TLoginProps } from './types'
+import { TRegisterProps } from './types'
 
 // Native Base
 import { Row, Column } from 'native-base'
@@ -24,7 +24,7 @@ import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 // i18n
 import { useTranslation } from 'react-i18next'
 
-const LoginScreen = memo(({ navigation }: TLoginProps) => {
+const RegisterScreen = memo(({ navigation }: TRegisterProps) => {
 	// Translation
 	const { t } = useTranslation()
 
@@ -41,13 +41,13 @@ const LoginScreen = memo(({ navigation }: TLoginProps) => {
 						color={'primary.400'}
 						marginBottom={10}
 					>
-						{t('auth.menu.login')}
+						{t('auth.menu.register')}
 					</AppText>
 
 					{/* Form */}
-					<LoginForm />
+					<RegisterForm />
 
-					{/* Register Now */}
+					{/* Already Have An Account? */}
 					<AppText
 						textAlign={'center'}
 						marginTop={5}
@@ -56,19 +56,17 @@ const LoginScreen = memo(({ navigation }: TLoginProps) => {
 						fontWeight={600}
 						lineHeight={17.5}
 					>
-						{t('auth.title.doesntHaveAccount')}
+						{t('auth.title.alreadyHaveAccount')}
 					</AppText>
 
-					{/* Register Button */}
+					{/* Login Button */}
 					<AppView justifyContent={'center'} alignItems={'center'}>
 						<AppButton
 							backgroundColor={'secondary.400'}
 							width={155}
-							onPress={() =>
-								navigation.navigate(E_AUTH_STACK_NAVIGATION.REGISTER)
-							}
+							onPress={() => navigation.navigate(E_AUTH_STACK_NAVIGATION.LOGIN)}
 						>
-							{t('auth.menu.register')}
+							{t('auth.menu.login')}
 						</AppButton>
 					</AppView>
 				</AuthLayout>
@@ -77,6 +75,6 @@ const LoginScreen = memo(({ navigation }: TLoginProps) => {
 	)
 })
 
-LoginScreen.displayName = 'LoginScreen'
+RegisterScreen.displayName = 'RegisterScreen'
 
-export { LoginScreen }
+export { RegisterScreen }

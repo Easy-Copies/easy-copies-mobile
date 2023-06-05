@@ -7,12 +7,14 @@
 			"changePassword": "Ganti Password"
 		},
 		"form": {
+			"name": "Nama",
 			"email": "Email",
 			"password": "Kata Sandi"
 		},
 		"title": {
 			"forgotPassword": "Lupa Password?",
-			"doesntHaveAccount": "Belum Punya Akun? Daftar Sekarang"
+			"doesntHaveAccount": "Belum Punya Akun? Daftar Sekarang",
+			"alreadyHaveAccount": "Sudah Punya Akun? Masuk Sekarang"
 		}
 	}
 }

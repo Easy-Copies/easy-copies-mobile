@@ -43,7 +43,13 @@ const AppInput = forwardRef(
 						}}
 					>
 						{t(error.message.key, {
-							field: inputLabel ? t(inputLabel) : undefined
+							field: inputLabel ? t(inputLabel) : undefined,
+							min: error.message?.values?.min
+								? error.message.values.min
+								: undefined,
+							max: error.message?.values?.max
+								? error.message.values.max
+								: undefined
 						})}
 					</FormControl.ErrorMessage>
 				)}

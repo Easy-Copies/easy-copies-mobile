@@ -1,6 +1,8 @@
 import * as yup from 'yup'
 
-export const yupLocale = {
+export const yupLocale = {}
+
+yup.setLocale({
 	mixed: {
 		default: {
 			key: 'app.validations.invalid'
@@ -12,10 +14,16 @@ export const yupLocale = {
 	string: {
 		email: {
 			key: 'app.validations.email'
-		}
+		},
+		min: ({ min }) => ({
+			key: 'app.validations.stringMin',
+			values: { min }
+		}),
+		max: ({ max }) => ({
+			key: 'app.validations.stringMax',
+			values: { max }
+		})
 	},
 	number: {},
 	boolean: {}
-}
-
-yup.setLocale(yupLocale)
+})

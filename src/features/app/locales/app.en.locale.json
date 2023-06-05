@@ -61,8 +61,8 @@
 			"invalid": "Field is invalid",
 			"invalidType": "Must be a {{type}}",
 			"required": "{{field}} is required",
-			"stringMin": "Must be at least {{min}} characters",
-			"stringMax": "Must be at most {{max}} characters"
+			"stringMin": "{{field}} must be at least {{min}} characters",
+			"stringMax": "{{field}} must be at most {{max}} characters"
 		}
 	}
 }

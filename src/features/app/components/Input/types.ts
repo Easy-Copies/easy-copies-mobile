@@ -3,5 +3,5 @@ import { IInputProps } from 'native-base'
 
 export interface IAppInputProps extends IInputProps {
 	inputLabel?: string
-	error?: { message?: any }
+	error?: { message?: any; values?: { [key: string]: any } }
 }
