@@ -1,0 +1,18 @@
+{
+	"auth": {
+		"menu": {
+			"login": "Login",
+			"register": "Register",
+			"forgotPassword": "Forgot Password",
+			"changePassword": "Change Password"
+		},
+		"form": {
+			"email": "Email",
+			"password": "Password"
+		},
+		"title": {
+			"forgotPassword": "Forgot Password?",
+			"doesntHaveAccount": "Doesn't Have an Account? Register Now"
+		}
+	}
+}

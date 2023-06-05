@@ -1,0 +1,18 @@
+{
+	"auth": {
+		"menu": {
+			"login": "Masuk",
+			"register": "Daftar",
+			"forgotPassword": "Lupa Password",
+			"changePassword": "Ganti Password"
+		},
+		"form": {
+			"email": "Email",
+			"password": "Kata Sandi"
+		},
+		"title": {
+			"forgotPassword": "Lupa Password?",
+			"doesntHaveAccount": "Belum Punya Akun? Daftar Sekarang"
+		}
+	}
+}
