@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // Redux Persist
 import { persistReducer } from 'redux-persist'
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 
 // Reducers / Slices
 import appReducer from '@/features/app/redux/slice'
@@ -15,20 +16,26 @@ import authReducer from '@/features/auth/redux/slice'
 import { emptySplitApi } from '@/features/app/redux'
 
 // App reducer
-const appPersistConfig = {
-	key: 'app',
-	storage: AsyncStorage,
-	whitelist: ['language']
-}
-const app = persistReducer(appPersistConfig, appReducer)
+const app = persistReducer<ReturnType<typeof appReducer>>(
+	{
+		key: 'app',
+		storage: AsyncStorage,
+		whitelist: ['language'],
+		stateReconciler: hardSet
+	},
+	appReducer
+)
 
-// AUth reducer
-const authPersistConfig = {
-	key: 'auth',
-	storage: AsyncStorage,
-	whitelist: ['isAuthenticated', 'tokens', 'authenticatedUser']
-}
-const auth = persistReducer(authPersistConfig, authReducer)
+// Auth reducer
+const auth = persistReducer<ReturnType<typeof authReducer>>(
+	{
+		key: 'auth',
+		storage: AsyncStorage,
+		whitelist: ['isAuthenticated', 'tokens', 'authenticatedUser'],
+		stateReconciler: hardSet
+	},
+	authReducer
+)
 
 const rootReducer = combineReducers({
 	app,

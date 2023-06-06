@@ -47,6 +47,7 @@
 			"internalServerError": "Terjadi Kesalahan Di Server",
 			"badRequest": "Terjadi Kesalahan Ketika Melakukan Request",
 			"unprocessableEntity": "Terdapat Kesalahan Dalam Form",
+			"timeout": "Request Time Out",
 			"networkDisconnected": "Jaringan Terputus"
 		},
 		"menu": {

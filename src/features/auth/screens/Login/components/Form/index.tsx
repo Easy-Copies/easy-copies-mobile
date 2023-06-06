@@ -15,12 +15,10 @@ import {
 import { E_AUTH_SIGN_TYPE } from '@/features/auth/constants'
 
 // Components
-import {
-	AppInput,
-	AppText,
-	AppButton,
-	useAppToast
-} from '@/features/app/components'
+import { AppInput, AppButton, useAppToast } from '@/features/app/components'
+
+// Native Base
+import { Column } from 'native-base'
 
 // i18n
 import { useTranslation } from 'react-i18next'
@@ -164,18 +162,25 @@ const LoginForm = memo(() => {
 			/>
 
 			{/* Forgot Password */}
-			<AppText
+			<Column
 				textAlign={'right'}
-				marginTop={1}
-				fontSize={14}
-				fontWeight={600}
-				lineHeight={17.5}
-				onPress={() =>
-					navigation.navigate(E_AUTH_STACK_NAVIGATION.FORGOT_PASSWORD)
-				}
+				alignItems={'flex-end'}
+				justifyContent={'flex-end'}
 			>
-				{t('auth.title.forgotPassword')}
-			</AppText>
+				<AppButton
+					onPress={() =>
+						navigation.navigate(E_AUTH_STACK_NAVIGATION.FORGOT_PASSWORD)
+					}
+					variant={'ghost'}
+					rounded={50}
+					_text={{
+						textAlign: 'right',
+						color: 'primary.400'
+					}}
+				>
+					{t('auth.title.forgotPassword')}
+				</AppButton>
+			</Column>
 
 			{/* Login Button */}
 			<AppButton
