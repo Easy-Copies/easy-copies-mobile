@@ -18,6 +18,8 @@ const middlewareRenderGenericError = (errorType: string): string => {
 	switch (errorType) {
 		case 'FETCH_ERROR':
 			return i18n.t('app.error.internalServerError')
+		case 'TIMEOUT_ERROR':
+			return i18n.t('app.error.timeout')
 		default:
 			return ''
 	}
@@ -51,6 +53,7 @@ export const middlewareError: Middleware = () => next => action => {
 				error?: string
 			}
 		}
+
 		const {
 			payload: { data, error, status }
 		} = _action
@@ -75,10 +78,32 @@ export const middlewareError: Middleware = () => next => action => {
 			})
 		} else {
 			Toast.show({
-				variant: 'solid',
-				description: `Error: ${GENERIC_ERROR || error}`
+				render: () => (
+					<AppToast
+						description={`Error: ${GENERIC_ERROR || error}`}
+						status='error'
+						title={middlewareRenderErrorByStatusCode(status as number)}
+						variant='top-accent'
+					/>
+				),
+				placement: 'top-right'
 			})
 		}
+	}
+
+	// Check for outside error, like request timeout
+	if (action?.error?.name === 'AbortError') {
+		Toast.show({
+			render: () => (
+				<AppToast
+					description={i18n.t('app.error.timeout')}
+					status='error'
+					title={'Timeout'}
+					variant='top-accent'
+				/>
+			),
+			placement: 'top-right'
+		})
 	}
 
 	return next(action)

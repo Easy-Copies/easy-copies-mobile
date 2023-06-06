@@ -47,6 +47,7 @@
 			"internalServerError": "Internal Server Error",
 			"badRequest": "Bad Request",
 			"unprocessableEntity": "Unprocessable Entity",
+			"timeout": "Request Timeout",
 			"networkDisconnected": "Network Disconnected"
 		},
 		"menu": {
