@@ -27,13 +27,13 @@ const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: API_BASE,
-	timeout: 1000,
+	timeout: 5000,
 	prepareHeaders(headers, { getState }) {
 		const rootState = getState() as IRootState
 		const token = rootState.auth.tokens.token
 
 		// Set request for coming from mobile to server
-		headers.set('X-Is-Mobile', '1')
+		headers.set('x-is-mobile', '1')
 
 		// Handle if you have any header send to the server
 		if (token !== '') {
@@ -52,13 +52,25 @@ const baseQueryWithReAuth: BaseQueryFn<
 	// wait until the mutex is available without locking it
 	await mutex.waitForUnlock()
 	let result = await baseQuery(args, api, extraOptions)
-	if (result.error && result.error.status === 401) {
+
+	if (
+		result.error &&
+		result.error.status === 401 &&
+		result.meta?.request?.url.includes('/auth/me')
+	) {
 		// checking whether the mutex is locked
 		if (!mutex.isLocked()) {
 			const release = await mutex.acquire()
 			try {
 				const refreshResult = (await baseQuery(
-					'v1/auth/refresh-token',
+					{
+						url: 'v1/auth/refresh-token',
+						method: 'POST',
+						body: {
+							refreshToken: (api.getState() as IRootState).auth.tokens
+								.refreshToken
+						}
+					},
 					api,
 					extraOptions
 				)) as { data: TAuthResponseToken }

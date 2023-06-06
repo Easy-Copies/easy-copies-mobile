@@ -14,8 +14,13 @@ import { useAppDispatch, useAppSelector } from './plugins'
 import {
 	appGetLanguage,
 	app_HANDLE_LANGUAGE,
-	app_HANDLE_INITIALIZE
+	app_HANDLE_INITIALIZE,
+	appGetInitialized
 } from './features/app/redux'
+import {
+	authGetIsAuthenticated,
+	useLazyAuth_meQuery
+} from './features/auth/redux'
 
 const EntryPoint = (): JSX.Element => {
 	// Dispatcher
@@ -23,6 +28,11 @@ const EntryPoint = (): JSX.Element => {
 
 	// Selector
 	const appLanguage = useAppSelector(appGetLanguage)
+	const appIsInitialized = useAppSelector(appGetInitialized)
+	const authIsAuthenticated = useAppSelector(authGetIsAuthenticated)
+
+	// RTK
+	const [getAuthenticatedUser] = useLazyAuth_meQuery()
 
 	// Handle localization
 	useEffect(() => {
@@ -33,13 +43,26 @@ const EntryPoint = (): JSX.Element => {
 
 	// Handle any async request before opening the app
 	useEffect(() => {
-		// Note: You have async request in here?
+		// Make loader of the app
 		dispatch(app_HANDLE_INITIALIZE(false))
 
 		setTimeout(() => {
 			dispatch(app_HANDLE_INITIALIZE(true))
 		}, 3000)
 	}, [dispatch])
+
+	// Load authenticated user when already authenticated
+	useEffect(() => {
+		// eslint-disable-next-line
+		;(async () => {
+			try {
+				if (authIsAuthenticated && appIsInitialized)
+					await getAuthenticatedUser().unwrap()
+			} catch (_) {
+				//
+			}
+		})()
+	}, [authIsAuthenticated, appIsInitialized, getAuthenticatedUser])
 
 	return (
 		<>

@@ -8,10 +8,7 @@ import * as yup from 'yup'
 
 // Constants
 import { AUTH_LOGIN_FORM } from '@/features/auth/constants/auth-form.constant'
-import {
-	E_APP_STACK_NAVIGATION,
-	E_AUTH_STACK_NAVIGATION
-} from '@/features/app/constants'
+import { E_AUTH_STACK_NAVIGATION } from '@/features/app/constants'
 import { E_AUTH_SIGN_TYPE } from '@/features/auth/constants'
 
 // Components
@@ -110,9 +107,6 @@ const LoginForm = memo(() => {
 					dispatch(
 						auth_HANDLE_AUTHENTICATED_USER(authenticatedUserResponse.result)
 					)
-
-					// Redirect to entry point
-					navigation.navigate(E_APP_STACK_NAVIGATION.ENTRY_POINT)
 				}
 
 				// Show Toast
