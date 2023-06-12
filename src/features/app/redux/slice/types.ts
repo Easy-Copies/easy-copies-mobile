@@ -5,6 +5,7 @@ export interface IAppSliceState {
 	isInitialized: boolean
 	counter: number
 	language: E_APP_LANGUAGE
+	isSplashIntroDone: boolean
 }
 
 export enum EAppSliceHandleCounterType {

@@ -6,7 +6,11 @@ import { AuthStackNavigation } from '@/features/auth/navigations'
 import { AppDrawerNavigation } from '@/features/app/navigations/Drawer'
 
 // App Screens
-import { AppScreen, AppSplashScreen } from '@/features/app/screens'
+import {
+	AppScreen,
+	AppSplashScreen,
+	AppSplashIntroScreen
+} from '@/features/app/screens'
 
 // Interfaces
 import { TAppRootStackNavigationParams } from './types'
@@ -18,7 +22,10 @@ import { E_APP_STACK_NAVIGATION } from '@/features/app/constants'
 import { useAppSelector } from '@/plugins'
 
 // Redux
-import { appGetInitialized } from '@/features/app/redux'
+import {
+	appGetInitialized,
+	appGetIsSplashIntroDone
+} from '@/features/app/redux'
 import { authGetIsAuthenticated } from '@/features/auth/redux'
 
 const Stack = createNativeStackNavigator<TAppRootStackNavigationParams>()
@@ -26,6 +33,7 @@ const AppRootStackNavigation = (): JSX.Element => {
 	// Selector
 	const appIsInitialized = useAppSelector(appGetInitialized)
 	const authIsAuthenticated = useAppSelector(authGetIsAuthenticated)
+	const appIsSplashIntroDone = useAppSelector(appGetIsSplashIntroDone)
 
 	return (
 		<Stack.Navigator
@@ -34,10 +42,19 @@ const AppRootStackNavigation = (): JSX.Element => {
 					? E_APP_STACK_NAVIGATION.AUTH
 					: appIsInitialized
 					? E_APP_STACK_NAVIGATION.ENTRY_POINT
-					: E_APP_STACK_NAVIGATION.SPLASH
+					: appIsSplashIntroDone
+					? E_APP_STACK_NAVIGATION.SPLASH
+					: E_APP_STACK_NAVIGATION.SPLASH_INTRO
 			}
 			screenOptions={{ headerShown: false }}
 		>
+			{!appIsSplashIntroDone && (
+				<Stack.Screen
+					name={E_APP_STACK_NAVIGATION.SPLASH_INTRO}
+					component={AppSplashIntroScreen}
+				/>
+			)}
+
 			{/* Check if app not initialized */}
 			{!appIsInitialized && (
 				<Stack.Screen

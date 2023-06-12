@@ -8,6 +8,19 @@
 		"our": "Kami",
 		"limit": "Limit",
 		"logout": "Keluar",
+		"start": "Mulai",
+		"next": "Selanjutnya",
+		"intro": {
+			"easyPrint": "Kemudahan Printing Dengan Satu Ketukan",
+			"features": {
+				"title": "Banyak Pilihan Fitur",
+				"description": "Pilih fitur sesuai dengan kebutuhan tugasmu"
+			},
+			"easyAndFast": {
+				"title": "Mudah dan Cepat",
+				"description": "Titip tugasmu sekarang dan ambil esok harinya"
+			}
+		},
 		"locale": {
 			"en": "English",
 			"id": "Indonesia"

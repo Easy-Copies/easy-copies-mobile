@@ -8,6 +8,19 @@
 		"our": "Our",
 		"limit": "Limit",
 		"logout": "Logout",
+		"start": "Start",
+		"next": "Next",
+		"intro": {
+			"easyPrint": "Print is more easy with one tap",
+			"features": {
+				"title": "Lot's of features",
+				"description": "Choose feature that match your assignment"
+			},
+			"easyAndFast": {
+				"title": "Easy and Fast",
+				"description": "Order now, take tomorrow"
+			}
+		},
 		"locale": {
 			"en": "English",
 			"id": "Indonesia"

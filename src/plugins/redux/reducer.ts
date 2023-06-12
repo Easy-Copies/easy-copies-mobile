@@ -20,7 +20,7 @@ const app = persistReducer<ReturnType<typeof appReducer>>(
 	{
 		key: 'app',
 		storage: AsyncStorage,
-		whitelist: ['language'],
+		whitelist: ['language', 'isSplashIntroDone'],
 		stateReconciler: hardSet
 	},
 	appReducer

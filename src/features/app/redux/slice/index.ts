@@ -20,7 +20,8 @@ import i18n from 'i18next'
 const initialState: IAppSliceState = {
 	isInitialized: false,
 	counter: 0,
-	language: E_APP_LANGUAGE.ID
+	language: E_APP_LANGUAGE.ID,
+	isSplashIntroDone: false
 }
 
 const appSlice = createSlice({
@@ -51,6 +52,12 @@ const appSlice = createSlice({
 			{ payload }: PayloadAction<boolean>
 		): void => {
 			state.isInitialized = payload
+		},
+		app_HANDLE_SPLASH_INTRO_DONE: (
+			state,
+			{ payload }: PayloadAction<boolean>
+		): void => {
+			state.isSplashIntroDone = payload
 		}
 	}
 })
@@ -59,12 +66,15 @@ const appSlice = createSlice({
 export const {
 	app_HANDLE_COUNTER,
 	app_HANDLE_LANGUAGE,
-	app_HANDLE_INITIALIZE
+	app_HANDLE_INITIALIZE,
+	app_HANDLE_SPLASH_INTRO_DONE
 } = appSlice.actions
 
 // Getters
 export const appGetInitialized = (state: IRootState) => state.app.isInitialized
 export const appGetCounter = (state: IRootState) => state.app.counter
 export const appGetLanguage = (state: IRootState) => state.app.language
+export const appGetIsSplashIntroDone = (state: IRootState) =>
+	state.app.isSplashIntroDone
 
 export default appSlice.reducer
