@@ -1,6 +1,7 @@
 export enum E_APP_STACK_NAVIGATION {
 	AUTH = 'Auth',
 	SPLASH = 'Splash',
+	SPLASH_INTRO = 'SplashIntro',
 	ENTRY_POINT = 'AppEntryPoint',
 	APP = 'App'
 }
