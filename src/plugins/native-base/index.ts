@@ -13,6 +13,9 @@ const nativeBaseTheme = extendTheme({
 		},
 		secondary: {
 			400: E_APP_COLORS.SECONDARY
+		},
+		gray: {
+			400: E_APP_COLORS.GRAY
 		}
 	},
 	fontConfig: {

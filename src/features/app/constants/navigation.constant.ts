@@ -12,6 +12,12 @@ export enum E_APP_DRAWER_NAVIGATION {
 	TODO_PARENT = 'TodoParent'
 }
 
+export enum E_APP_BOTTOM_TAB_NAVIGATION {
+	HOME = 'HomeBottomTab',
+	TRANSACTION = 'TransactionBottomTab',
+	ACCOUNT = 'AccountTransactionBottomTab'
+}
+
 export enum E_AUTH_STACK_NAVIGATION {
 	LOGIN = 'Login',
 	REGISTER = 'Register',
