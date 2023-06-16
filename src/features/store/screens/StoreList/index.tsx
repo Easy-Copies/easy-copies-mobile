@@ -16,9 +16,19 @@ import { FlatList } from 'native-base'
 // Redux
 import { useLazyStore_indexQuery } from '@/features/store/redux'
 
+// React Navigation
+import { useNavigation } from '@react-navigation/native'
+
+// Types
+import { TStoreListScreenProps } from '@/features/store/screens/StoreList/types'
+import { E_STORE_STACK_NAVIGATION } from '@/features/app/constants'
+
 const StoreListScreen = memo(() => {
 	// RTK
 	const [getStoreList, { data: storeList }] = useLazyStore_indexQuery()
+
+	// Navigation
+	const navigation = useNavigation<TStoreListScreenProps['navigation']>()
 
 	// Do when user came to this component
 	useEffect(() => {
@@ -33,7 +43,16 @@ const StoreListScreen = memo(() => {
 					data={storeList?.result?.rows || []}
 					keyExtractor={item => item.id}
 					renderItem={({ item }) => (
-						<StyledStoreCard marginTop={'10px'} marginBottom={'10px'}>
+						<StyledStoreCard
+							marginTop={'10px'}
+							marginBottom={'10px'}
+							onPress={() =>
+								navigation.navigate(E_STORE_STACK_NAVIGATION.STORE_DETAIL, {
+									id: item.id,
+									name: item.name
+								})
+							}
+						>
 							<AppView
 								flexDirection={'row'}
 								justifyContent={'center'}

@@ -2,7 +2,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // Store Screens
-import { StoreListScreen } from '@/features/store/screens'
+import { StoreDetailScreen, StoreListScreen } from '@/features/store/screens'
 
 // Constants
 import { E_STORE_STACK_NAVIGATION } from '@/features/app/constants'
@@ -32,6 +32,23 @@ const StoreStackNavigation = (): JSX.Element => {
 							<AppNavigationHeader
 								isFromSomeWhere={props?.back !== undefined}
 								title={t('store.storeList')}
+								navigation={props.navigation}
+							/>
+						)
+					}
+				}}
+			/>
+			<Stack.Screen
+				name={E_STORE_STACK_NAVIGATION.STORE_DETAIL}
+				component={StoreDetailScreen}
+				options={{
+					header: props => {
+						const { name } = props.route.params as { name: string }
+
+						return (
+							<AppNavigationHeader
+								isFromSomeWhere={props?.back !== undefined}
+								title={name}
 								navigation={props.navigation}
 							/>
 						)
