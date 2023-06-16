@@ -1,6 +1,7 @@
 {
 	"app": {
 		"welcome": "Titip tugasmu hari ini, ambil esok hari",
+		"welcomeGreet": "Selamat Datang",
 		"recover": "Pulihkan",
 		"your": "Anda",
 		"or": "Atau",
@@ -10,6 +11,7 @@
 		"logout": "Keluar",
 		"start": "Mulai",
 		"next": "Selanjutnya",
+		"more": "Selengkapnya",
 		"intro": {
 			"easyPrint": "Kemudahan Printing Dengan Satu Ketukan",
 			"features": {
@@ -63,13 +65,21 @@
 			"timeout": "Request Time Out",
 			"networkDisconnected": "Jaringan Terputus"
 		},
+		"services": {
+			"services": "Jasa",
+			"printing": "Printing",
+			"fotocopy": "Foto Copy",
+			"binding": "Binding",
+			"laminating": "Laminating"
+		},
 		"menu": {
 			"menu": "Menu",
 			"backOffice": "Back Office",
 			"home": "Beranda",
 			"options": "Pengaturan",
 			"todo": "Todo",
-			"Auth": "Autentikasi"
+			"auth": "Autentikasi",
+			"transaction": "Transaksi"
 		},
 		"validations": {
 			"email": "Email tidak valid",

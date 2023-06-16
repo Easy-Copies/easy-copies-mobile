@@ -1,11 +1,11 @@
 // React
 import { useEffect } from 'react'
 
-// App Navigation
-import { AppRootStackNavigation } from './features/app/navigations'
-
 // React Native
 import { StatusBar } from 'react-native'
+
+// App Navigation
+import { AppRootStackNavigation } from './features/app/navigations'
 
 // Plugins
 import { useAppDispatch, useAppSelector } from './plugins'

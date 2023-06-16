@@ -25,7 +25,11 @@ const styledComponentsTheme = {
 		THIN_ITALIC: E_APP_FONTS.THIN_ITALIC
 	},
 	colors: {
-		primary: E_APP_COLORS.PRIMARY_400
+		primary: E_APP_COLORS.PRIMARY,
+		secondary: E_APP_COLORS.SECONDARY,
+		gray: E_APP_COLORS.GRAY,
+		blue: E_APP_COLORS.BLUE,
+		lightBlue: E_APP_COLORS.LIGHT_BLUE
 	}
 }
 

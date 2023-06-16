@@ -6,6 +6,8 @@ import { appEn, appId } from '@/features/app/locales'
 import { optionsEn, optionsId } from '@/features/options/locales'
 import { todoEn, todoId } from '@/features/todo/locales'
 import { authEn, authId } from '@/features/auth/locales'
+import { homeEn, homeId } from '@/features/home/locales'
+import { storeEn, storeId } from '@/features/store/locales'
 
 const language = {
 	[E_APP_LANGUAGE.EN]: {
@@ -13,7 +15,9 @@ const language = {
 			...appEn,
 			...optionsEn,
 			...todoEn,
-			...authEn
+			...authEn,
+			...homeEn,
+			...storeEn
 		}
 	},
 	[E_APP_LANGUAGE.ID]: {
@@ -21,7 +25,9 @@ const language = {
 			...appId,
 			...optionsId,
 			...todoId,
-			...authId
+			...authId,
+			...homeId,
+			...storeId
 		}
 	}
 }

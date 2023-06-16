@@ -1,6 +1,7 @@
 {
 	"app": {
 		"welcome": "Order today, get tomorrow",
+		"welcomeGreet": "Welcome",
 		"recover": "Recover",
 		"your": "Your",
 		"or": "Or",
@@ -10,6 +11,7 @@
 		"logout": "Logout",
 		"start": "Start",
 		"next": "Next",
+		"more": "More",
 		"intro": {
 			"easyPrint": "Print is more easy with one tap",
 			"features": {
@@ -69,7 +71,15 @@
 			"home": "Home",
 			"options": "Options",
 			"todo": "Todo",
-			"Auth": "Authentication"
+			"auth": "Authentication",
+			"transaction": "Transaction"
+		},
+		"services": {
+			"services": "Services",
+			"printing": "Printing",
+			"fotocopy": "Foto Copy",
+			"binding": "Binding",
+			"laminating": "Laminating"
 		},
 		"validations": {
 			"email": "Email is invalid",

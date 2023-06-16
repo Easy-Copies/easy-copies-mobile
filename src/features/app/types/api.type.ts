@@ -8,7 +8,6 @@ export interface IAppResponse<T = unknown> {
 
 export interface IAppResponsePagination<T extends unknown[]> {
 	message: string
-	status: number
 	result: IAppCommonPagination<T>
 }
 
@@ -17,4 +16,11 @@ export interface IAppResponseError {
 		message: string
 		field?: string
 	}[]
+}
+
+export interface IAppPaginationQuery {
+	limit?: number
+	page?: number
+	sort?: 'desc' | 'asc'
+	column?: string
 }

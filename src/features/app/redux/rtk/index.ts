@@ -57,7 +57,7 @@ const baseQueryWithReAuth: BaseQueryFn<
 		result.error &&
 		result.error.status === 401 &&
 		result.meta?.request?.url &&
-		['/auth/verify'].includes(result.meta?.request?.url)
+		!['/auth/verify'].includes(result.meta?.request?.url)
 	) {
 		// checking whether the mutex is locked
 		if (!mutex.isLocked()) {

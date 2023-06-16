@@ -3,14 +3,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // Navigation
 import { AuthStackNavigation } from '@/features/auth/navigations'
-import { AppDrawerNavigation } from '@/features/app/navigations/Drawer'
+import { AppBottomTabNavigation } from '@/features/app/navigations/BottomTab'
+import { StoreStackNavigation } from '@/features/store/navigations'
 
 // App Screens
-import {
-	AppScreen,
-	AppSplashScreen,
-	AppSplashIntroScreen
-} from '@/features/app/screens'
+import { AppSplashScreen, AppSplashIntroScreen } from '@/features/app/screens'
 
 // Interfaces
 import { TAppRootStackNavigationParams } from './types'
@@ -75,12 +72,13 @@ const AppRootStackNavigation = (): JSX.Element => {
 			{appIsInitialized && authIsAuthenticated && (
 				<>
 					<Stack.Screen
-						name={E_APP_STACK_NAVIGATION.ENTRY_POINT}
-						component={AppScreen}
-					/>
-					<Stack.Screen
 						name={E_APP_STACK_NAVIGATION.APP}
-						component={AppDrawerNavigation}
+						component={AppBottomTabNavigation}
+					/>
+
+					<Stack.Screen
+						name={E_APP_STACK_NAVIGATION.STORE}
+						component={StoreStackNavigation}
 					/>
 				</>
 			)}
@@ -88,4 +86,4 @@ const AppRootStackNavigation = (): JSX.Element => {
 	)
 }
 
-export { AppDrawerNavigation, AppRootStackNavigation }
+export { AppRootStackNavigation }
