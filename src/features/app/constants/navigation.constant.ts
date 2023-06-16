@@ -3,7 +3,8 @@ export enum E_APP_STACK_NAVIGATION {
 	SPLASH = 'Splash',
 	SPLASH_INTRO = 'SplashIntro',
 	ENTRY_POINT = 'AppEntryPoint',
-	APP = 'App'
+	APP = 'App',
+	STORE = 'Store'
 }
 
 export enum E_APP_DRAWER_NAVIGATION {
@@ -36,4 +37,8 @@ export enum E_OPTION_STACK_NAVIGATION {
 
 export enum E_TODO_STACK_NAVIGATION {
 	TODO = 'Todo'
+}
+
+export enum E_STORE_STACK_NAVIGATION {
+	STORE_LIST = 'StoreList'
 }

@@ -23,7 +23,10 @@ const AppBottomTabNavigation = (): JSX.Element => {
 			<BottomTab.Screen
 				name={E_APP_BOTTOM_TAB_NAVIGATION.HOME}
 				component={HomeStackNavigation}
-				options={{ title: t('app.menu.home') as string, headerShown: false }}
+				options={{
+					title: t('app.menu.home') as string,
+					headerShown: false
+				}}
 			/>
 		</BottomTab.Navigator>
 	)

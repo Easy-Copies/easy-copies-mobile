@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 // Navigation
 import { AuthStackNavigation } from '@/features/auth/navigations'
 import { AppBottomTabNavigation } from '@/features/app/navigations/BottomTab'
+import { StoreStackNavigation } from '@/features/store/navigations'
 
 // App Screens
 import { AppSplashScreen, AppSplashIntroScreen } from '@/features/app/screens'
@@ -73,6 +74,11 @@ const AppRootStackNavigation = (): JSX.Element => {
 					<Stack.Screen
 						name={E_APP_STACK_NAVIGATION.APP}
 						component={AppBottomTabNavigation}
+					/>
+
+					<Stack.Screen
+						name={E_APP_STACK_NAVIGATION.STORE}
+						component={StoreStackNavigation}
 					/>
 				</>
 			)}

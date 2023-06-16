@@ -28,7 +28,8 @@ const styledComponentsTheme = {
 		primary: E_APP_COLORS.PRIMARY,
 		secondary: E_APP_COLORS.SECONDARY,
 		gray: E_APP_COLORS.GRAY,
-		blue: E_APP_COLORS.BLUE
+		blue: E_APP_COLORS.BLUE,
+		lightBlue: E_APP_COLORS.LIGHT_BLUE
 	}
 }
 

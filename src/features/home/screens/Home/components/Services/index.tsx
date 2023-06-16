@@ -66,7 +66,6 @@ const HomeServices = memo(() => {
 				<FlatList
 					columnWrapperStyle={{
 						justifyContent: 'space-between',
-						marginRight: 20,
 						marginBottom: 20
 					}}
 					flex={1}

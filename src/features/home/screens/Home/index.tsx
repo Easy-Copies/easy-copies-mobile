@@ -6,7 +6,7 @@ import { ScrollView } from 'native-base'
 
 // Components
 import { AppWrapper, AppContainer } from '@/features/app/components'
-import { HomeServices, HomeUserInfo } from './components'
+import { HomeServices, HomeUserInfo, HomeNearbyStore } from './components'
 
 const HomeScreen = memo(() => {
 	return (
@@ -16,6 +16,10 @@ const HomeScreen = memo(() => {
 
 			<AppWrapper>
 				<AppContainer>
+					{/* Nearby Store */}
+					<HomeNearbyStore />
+
+					{/* Home Services */}
 					<HomeServices />
 				</AppContainer>
 			</AppWrapper>
