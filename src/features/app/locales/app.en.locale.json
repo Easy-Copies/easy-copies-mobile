@@ -12,6 +12,11 @@
 		"start": "Start",
 		"next": "Next",
 		"more": "More",
+		"totalPrice": "Total Price",
+		"inkType": {
+			"color": "Color",
+			"blackWhite": "Black White"
+		},
 		"intro": {
 			"easyPrint": "Print is more easy with one tap",
 			"features": {

@@ -1,0 +1,14 @@
+{
+	"transaction": {
+		"makeOrder": "Buat Pesanan",
+		"form": {
+			"paperType": "Kertas",
+			"inkType": "Tinta",
+			"sheetLength": "Jumlah Halaman",
+			"pickupDate": "Tanggal Pengambilan",
+			"responsiblePerson": "Nama Orang Pengambil",
+			"description": "Keterangan",
+			"files": "File"
+		}
+	}
+}

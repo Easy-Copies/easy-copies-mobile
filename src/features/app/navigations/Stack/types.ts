@@ -5,7 +5,8 @@ import { E_APP_STACK_NAVIGATION } from '@/features/app/constants'
 import { NavigatorScreenParams } from '@react-navigation/native'
 
 // Types
-import { TStoreStackNavigationParams } from '@/features/store/navigations/Stack/types'
+import { TStoreStackNavigationParams } from '@/features/store/navigations'
+import { TTransactionStackNavigationParams } from '@/features/transaction/navigations'
 
 export type TAppRootStackNavigationParams = {
 	[E_APP_STACK_NAVIGATION.AUTH]: undefined
@@ -14,4 +15,5 @@ export type TAppRootStackNavigationParams = {
 	[E_APP_STACK_NAVIGATION.ENTRY_POINT]: undefined
 	[E_APP_STACK_NAVIGATION.APP]: undefined
 	[E_APP_STACK_NAVIGATION.STORE]: NavigatorScreenParams<TStoreStackNavigationParams>
+	[E_APP_STACK_NAVIGATION.TRANSACTION]: NavigatorScreenParams<TTransactionStackNavigationParams>
 }

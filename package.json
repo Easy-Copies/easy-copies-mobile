@@ -29,6 +29,7 @@
 	"dependencies": {
 		"@hookform/resolvers": "^3.0.0",
 		"@react-native-async-storage/async-storage": "^1.17.11",
+		"@react-native-community/datetimepicker": "^7.1.0",
 		"@react-navigation/bottom-tabs": "^6.5.7",
 		"@react-navigation/drawer": "^6.6.2",
 		"@react-navigation/native": "^6.1.6",
@@ -42,6 +43,7 @@
 		"react-hook-form": "^7.43.7",
 		"react-i18next": "^12.2.0",
 		"react-native": "0.71.7",
+		"react-native-document-picker": "^9.0.1",
 		"react-native-dotenv": "^3.4.8",
 		"react-native-flipper": "^0.184.0",
 		"react-native-gesture-handler": "^2.9.0",

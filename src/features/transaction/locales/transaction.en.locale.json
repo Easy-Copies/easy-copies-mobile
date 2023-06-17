@@ -1,0 +1,14 @@
+{
+	"transaction": {
+		"makeOrder": "Make Order",
+		"form": {
+			"paperType": "Paper Type",
+			"inkType": "Ink Type",
+			"sheetLength": "Sheet Length",
+			"pickupDate": "Pickup Date",
+			"responsiblePerson": "Responsible Person",
+			"description": "Description",
+			"files": "Files"
+		}
+	}
+}
