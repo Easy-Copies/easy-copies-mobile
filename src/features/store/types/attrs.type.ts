@@ -11,14 +11,14 @@ export interface IStoreAttrsStore {
 }
 
 export interface IStoreAttrsShow {
-	params: { id: number }
+	params: { id: string }
 }
 
 export interface IStoreAttrsUpdate {
-	params: { id: number }
+	params: { id: string }
 	body: TStoreForm
 }
 
 export interface IStoreAttrsDestroy {
-	params: { id: number }
+	params: { id: string }
 }

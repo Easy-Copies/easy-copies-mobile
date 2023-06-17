@@ -7,8 +7,22 @@ export interface IStore {
 	address: string
 	addressNote: string | null
 	provinceCode: string
+	province: {
+		code: string
+		name: string
+	} | null
 	regencyCode: string
+	regency: {
+		code: string
+		regencyCode: string
+		name: string
+	} | null
 	districtCode: string
+	district: {
+		code: string
+		regencyCode: string
+		name: string
+	} | null
 	postalCode: string
 	mapCoordinate: { longitude: number; latitude: number } | null
 	storeLogo: string | null

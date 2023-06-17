@@ -22,7 +22,7 @@ export const storeApi = emptySplitApi.injectEndpoints({
 				params: payload?.params
 			})
 		}),
-		store_show: builder.mutation<IStoreResponseDetail, IStoreAttrsShow>({
+		store_show: builder.query<IStoreResponseDetail, IStoreAttrsShow>({
 			query: payload => `v1/stores/${payload.params.id}`
 		}),
 		store_store: builder.mutation<IStoreResponseDetail, IStoreAttrsStore>({
@@ -51,7 +51,7 @@ export const storeApi = emptySplitApi.injectEndpoints({
 
 export const {
 	useLazyStore_indexQuery,
-	useStore_showMutation,
+	useLazyStore_showQuery,
 	useStore_storeMutation,
 	useStore_updateMutation,
 	useStore_destroyMutation

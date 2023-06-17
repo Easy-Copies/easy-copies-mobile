@@ -21,6 +21,8 @@ import { useNavigation } from '@react-navigation/native'
 
 // Types
 import { TStoreListScreenProps } from '@/features/store/screens/StoreList/types'
+
+// Constants
 import { E_STORE_STACK_NAVIGATION } from '@/features/app/constants'
 
 const StoreListScreen = memo(() => {

@@ -1,23 +1,40 @@
 // Styled Components
 import styled from 'styled-components'
 
-// Components
-import { AppView } from '@/features/app/components/View'
-
 // Native Base
-import { Pressable } from 'native-base'
+import { Image, Pressable } from 'native-base'
 
-export const StyledStoreCard = styled(Pressable)`
-	background-color: #fff;
-	height: 100px;
-	border-radius: 6px;
-	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
-	padding: 10px;
+// Components
+import { AppView } from '@/features/app/components'
+
+export const StyledStorePhoto = styled(Image)`
+	width: 100%;
+	height: 250px;
 `
 
-export const StyledStorePhoto = styled(AppView)`
-	background-color: ${props => props.theme.colors.gray};
-	width: 80px;
-	height: 80px;
-	border-radius: 8px;
+export const StyledStoreServiceCard = styled(Pressable)`
+	width: 100%;
+	height: 76px;
+	border-radius: 6px;
+	padding: 10px;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+	border-color: ${props => props.theme.colors.lightGray};
+	border-width: 1px;
+`
+
+export const StyledStickyBottom = styled(AppView)`
+	width: 100%;
+	height: 70px;
+	box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.25);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
 `
