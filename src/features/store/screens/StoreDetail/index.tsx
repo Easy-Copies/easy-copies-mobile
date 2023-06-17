@@ -156,8 +156,13 @@ const StoreDetailScreen = memo(({ route }: TStoreDetailScreenProps) => {
 						textAlign={'right'}
 						width={'100%'}
 					>
-						<AppButton width={'100px'} height={'40px'}>
-							Lanjut!
+						<AppButton
+							width={'100px'}
+							height={'40px'}
+							backgroundColor={'primary.400'}
+							_text={{ textTransform: 'none' }}
+						>
+							Lanjut
 						</AppButton>
 					</AppView>
 				</StyledStickyBottom>

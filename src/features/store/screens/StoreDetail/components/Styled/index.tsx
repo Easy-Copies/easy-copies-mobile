@@ -10,6 +10,7 @@ import { AppView } from '@/features/app/components'
 export const StyledStorePhoto = styled(Image)`
 	width: 100%;
 	height: 250px;
+	object-fit: cover;
 `
 
 export const StyledStoreServiceCard = styled(Pressable)`
