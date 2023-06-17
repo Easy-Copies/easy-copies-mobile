@@ -16,6 +16,15 @@ const nativeBaseTheme = extendTheme({
 		},
 		gray: {
 			400: E_APP_COLORS.GRAY
+		},
+		lightGray: {
+			400: E_APP_COLORS.LIGHT_GRAY
+		},
+		blue: {
+			400: E_APP_COLORS.BLUE
+		},
+		lightBlue: {
+			400: E_APP_COLORS.LIGHT_BLUE
 		}
 	},
 	fontConfig: {

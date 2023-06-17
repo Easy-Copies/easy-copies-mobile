@@ -40,5 +40,6 @@ export enum E_TODO_STACK_NAVIGATION {
 }
 
 export enum E_STORE_STACK_NAVIGATION {
-	STORE_LIST = 'StoreList'
+	STORE_LIST = 'StoreList',
+	STORE_DETAIL = 'StoreDetail'
 }

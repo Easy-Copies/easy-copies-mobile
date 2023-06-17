@@ -13,10 +13,10 @@ import {
 } from '@/features/app/navigations'
 import { TStoreStackNavigationParams } from '@/features/store/navigations'
 
-export type TStoreListScreenProps = CompositeScreenProps<
+export type TStoreDetailScreenProps = CompositeScreenProps<
 	NativeStackScreenProps<
 		TStoreStackNavigationParams,
-		E_STORE_STACK_NAVIGATION.STORE_LIST
+		E_STORE_STACK_NAVIGATION.STORE_DETAIL
 	>,
 	CompositeScreenProps<
 		NativeStackScreenProps<TAppRootStackNavigationParams>,

@@ -35,9 +35,9 @@ const AppNavigationHeader = memo(
 							paddingRight={20}
 							alignItems={'center'}
 							flexDirection={'row'}
-							width={'100%'}
+							justifyContent={'space-between'}
 						>
-							{/* Back Button */}
+							{/* Left Side */}
 							{isFromSomeWhere && (
 								<Pressable onPress={() => navigation.goBack()}>
 									<StyledImageBackButton alt={'back'} />
@@ -50,7 +50,6 @@ const AppNavigationHeader = memo(
 								textAlign={'center'}
 								justifyContent={'center'}
 								alignItems={'center'}
-								width={isFromSomeWhere ? '84.6%' : '100%'}
 							>
 								<AppText
 									fontWeight={'600'}
@@ -60,6 +59,11 @@ const AppNavigationHeader = memo(
 								>
 									{title}
 								</AppText>
+							</AppView>
+
+							{/* Title */}
+							<AppView>
+								<AppText color={'primary.400'}>Empty</AppText>
 							</AppView>
 						</AppView>
 					</SafeAreaView>

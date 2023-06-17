@@ -8,4 +8,5 @@ export interface IAppContainerProps extends ViewProps {
 	marginTop?: string
 	paddingBottom?: string
 	paddingTop?: string
+	withoutHeight?: boolean
 }

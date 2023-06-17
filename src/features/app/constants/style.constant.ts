@@ -2,6 +2,7 @@ export enum E_APP_COLORS {
 	PRIMARY = '#1D2539',
 	SECONDARY = '#7081AA',
 	GRAY = '#D9D9D9',
+	LIGHT_GRAY = '#D2D2D2',
 	BLUE = '#7080AA',
 	LIGHT_BLUE = '#E7EDFF'
 }
