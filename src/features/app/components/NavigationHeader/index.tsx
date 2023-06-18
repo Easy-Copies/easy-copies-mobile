@@ -2,7 +2,7 @@
 import { memo } from 'react'
 
 // React Native
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, Platform } from 'react-native'
 
 // Components
 import { StyledImageBackButton, StyledWrapper } from './components'
@@ -25,7 +25,9 @@ const AppNavigationHeader = memo(
 				style={{
 					backgroundColor: themeNativeBase.colors.primary['400'],
 					width: '100%',
-					height: 105
+					height: Platform.OS === 'ios' ? 80 : 70,
+					justifyContent: 'center',
+					paddingTop: Platform.OS === 'ios' ? 15 : undefined
 				}}
 			>
 				<StyledWrapper>

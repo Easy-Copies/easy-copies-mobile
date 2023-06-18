@@ -7,7 +7,7 @@
 			"sheetLength": "Sheet Length",
 			"pickupDate": "Pickup Date",
 			"responsiblePerson": "Responsible Person",
-			"description": "Description",
+			"description": "Description (Optional)",
 			"files": "Files"
 		}
 	}

@@ -35,7 +35,10 @@ import { EStoreServiceName } from '@/features/store/children/store-service/types
 const StoreDetailScreen = memo(
 	({ route, navigation }: TStoreDetailScreenProps) => {
 		// Common State
-		const [selectedStoreService, setSelectedStoreService] = useState<string>('')
+		const [selectedStoreService, setSelectedStoreService] = useState<{
+			storePricePerSheet: number
+			storeServiceName: EStoreServiceName
+		} | null>(null)
 
 		// RTK
 		const [
@@ -121,7 +124,12 @@ const StoreDetailScreen = memo(
 												marginBottom={'10px'}
 												onPress={() =>
 													setSelectedStoreService(previousStoreService =>
-														previousStoreService === row.name ? '' : row.name
+														previousStoreService?.storeServiceName === row.name
+															? null
+															: {
+																	storeServiceName: row.name,
+																	storePricePerSheet: row.pricePerSheet
+															  }
 													)
 												}
 											>
@@ -134,7 +142,8 @@ const StoreDetailScreen = memo(
 														{row.name}
 													</AppText>
 
-													{selectedStoreService === row.name && (
+													{selectedStoreService?.storeServiceName ===
+														row.name && (
 														<CheckIcon size='5' mt='0.5' color='emerald.500' />
 													)}
 												</AppView>
@@ -174,7 +183,10 @@ const StoreDetailScreen = memo(
 										screen: E_TRANSACTION_STACK_NAVIGATION.TRANSACTION_CREATE,
 										params: {
 											storeId: route.params.id,
-											storeService: selectedStoreService as EStoreServiceName
+											storeService:
+												selectedStoreService.storeServiceName as EStoreServiceName,
+											storePricePerSheet:
+												selectedStoreService.storePricePerSheet
 										}
 									})
 								}

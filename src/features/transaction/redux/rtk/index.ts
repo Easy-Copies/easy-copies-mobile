@@ -1,48 +1,48 @@
 // Interfaces
 import {
-	IStoreAttrsIndex,
-	IStoreAttrsStore,
-	IStoreAttrsShow,
-	IStoreAttrsUpdate,
-	IStoreAttrsDestroy
-} from '@/features/store/types/attrs.type'
+	ITransactionAttrsIndex,
+	ITransactionAttrsStore,
+	ITransactionAttrsShow
+} from '@/features/transaction/types/attrs.type'
 import {
-	IStoreResponseList,
-	IStoreResponseDetail
-} from '@/features/store/types/response.type'
+	ITransactionResponseList,
+	ITransactionResponseDetail
+} from '@/features/transaction/types/response.type'
 
 // Rtk
 import { emptySplitApi } from '@/features/app/redux'
 
-export const storeApi = emptySplitApi.injectEndpoints({
+// Moment
+import moment from 'moment'
+
+export const transactionApi = emptySplitApi.injectEndpoints({
 	endpoints: builder => ({
-		store_index: builder.query<IStoreResponseList, IStoreAttrsIndex | void>({
+		transaction_index: builder.query<
+			ITransactionResponseList,
+			ITransactionAttrsIndex | void
+		>({
 			query: payload => ({
-				url: 'v1/stores',
+				url: 'v1/transactions',
 				params: payload?.params
 			})
 		}),
-		store_show: builder.query<IStoreResponseDetail, IStoreAttrsShow>({
-			query: payload => `v1/stores/${payload.params.id}`
+		transaction_show: builder.query<
+			ITransactionResponseDetail,
+			ITransactionAttrsShow
+		>({
+			query: payload => `v1/transactions/${payload.params.id}`
 		}),
-		store_store: builder.mutation<IStoreResponseDetail, IStoreAttrsStore>({
+		transaction_store: builder.mutation<
+			ITransactionResponseDetail,
+			ITransactionAttrsStore
+		>({
 			query: payload => ({
-				url: `v1/stores`,
+				url: `v1/transactions/${payload.params.storeId}`,
 				method: 'POST',
-				body: payload.body
-			})
-		}),
-		store_update: builder.mutation<IStoreResponseDetail, IStoreAttrsUpdate>({
-			query: payload => ({
-				url: `v1/stores/${payload.params.id}`,
-				method: 'PATCH',
-				body: payload.body
-			})
-		}),
-		store_destroy: builder.mutation<IStoreResponseDetail, IStoreAttrsDestroy>({
-			query: payload => ({
-				url: `v1/stores/${payload.params.id}`,
-				method: 'DELETE'
+				body: {
+					...payload.body,
+					pickupDate: moment(payload.body.pickupDate).toISOString()
+				}
 			})
 		})
 	}),
@@ -50,9 +50,7 @@ export const storeApi = emptySplitApi.injectEndpoints({
 })
 
 export const {
-	useLazyStore_indexQuery,
-	useLazyStore_showQuery,
-	useStore_storeMutation,
-	useStore_updateMutation,
-	useStore_destroyMutation
-} = storeApi
+	useLazyTransaction_indexQuery,
+	useLazyTransaction_showQuery,
+	useTransaction_storeMutation
+} = transactionApi

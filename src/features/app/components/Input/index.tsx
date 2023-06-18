@@ -14,7 +14,7 @@ import omit from 'lodash.omit'
 import { useTranslation } from 'react-i18next'
 
 // React Native Date Time Picker
-import DateTimePicker from '@react-native-community/datetimepicker'
+import DatePicker from 'react-native-date-picker'
 
 // Reducers
 import {
@@ -25,8 +25,21 @@ import {
 // Components
 import { StyledDatePickerImage } from './components'
 
+// Moment
+import moment from 'moment'
+
 const AppInput = forwardRef(
-	({ inputLabel, error, inputType, ...rest }: IAppInputProps, ref) => {
+	(
+		{
+			inputLabel,
+			error,
+			inputType,
+			dateValue,
+			onChangeDateTime,
+			...rest
+		}: IAppInputProps,
+		ref
+	) => {
 		// Translation
 		const { t } = useTranslation()
 
@@ -58,10 +71,6 @@ const AppInput = forwardRef(
 				{inputType && ['date', 'time'].includes(inputType) ? (
 					<>
 						<Pressable
-							zIndex={2}
-							width={'100%'}
-							height={'100%'}
-							backgroundColor={'red.400'}
 							onPress={() => {
 								datePickerPickerOptionsDispatch({
 									type: EDatePickerOptionsActionType.SET_SHOW,
@@ -77,22 +86,41 @@ const AppInput = forwardRef(
 								{...omit(rest, ['ref'])}
 								ref={ref as never}
 								InputRightElement={<StyledDatePickerImage />}
-								zIndex={1}
+								value={moment(dateValue).format('DD MMMM YYYY').toString()}
 								isReadOnly
 							/>
 						</Pressable>
 
 						{/* Date Time Picker */}
-						{dateTimePickerOptions.show && (
-							<DateTimePicker
-								value={dateTimePickerOptions.date}
-								mode={dateTimePickerOptions.mode}
-								is24Hour={true}
-								onChange={(_, selectedDate) => {
-									console.log('SELECTED DATE', selectedDate)
-								}}
-							/>
-						)}
+						<DatePicker
+							modal
+							mode={inputType}
+							open={dateTimePickerOptions.show}
+							date={dateTimePickerOptions.date}
+							onConfirm={date => {
+								if (onChangeDateTime) {
+									onChangeDateTime(date)
+
+									if (date) {
+										datePickerPickerOptionsDispatch({
+											type: EDatePickerOptionsActionType.SET_DATE,
+											payload: date
+										})
+									}
+								}
+
+								datePickerPickerOptionsDispatch({
+									type: EDatePickerOptionsActionType.SET_SHOW,
+									payload: false
+								})
+							}}
+							onCancel={() => {
+								datePickerPickerOptionsDispatch({
+									type: EDatePickerOptionsActionType.SET_SHOW,
+									payload: false
+								})
+							}}
+						/>
 					</>
 				) : (
 					<Input {...omit(rest, ['ref'])} ref={ref as never} />

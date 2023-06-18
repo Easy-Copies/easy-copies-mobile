@@ -37,4 +37,5 @@ export const StyledBottomWrapper = styled(View)`
 	align-items: center;
 	justify-content: space-between;
 	flex-direction: row;
+	margin-bottom: 20px;
 `

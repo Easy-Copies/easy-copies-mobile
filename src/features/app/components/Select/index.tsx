@@ -19,7 +19,7 @@ const AppSelect = forwardRef(
 		const { t } = useTranslation()
 
 		return (
-			<FormControl isInvalid={Boolean(error)} marginBottom={2.5}>
+			<FormControl isInvalid={Boolean(error)} marginBottom={2.5} isReadOnly>
 				{inputLabel && (
 					<FormControl.Label
 						marginBottom={2}

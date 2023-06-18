@@ -66,7 +66,7 @@ const EntryPoint = (): JSX.Element => {
 
 	return (
 		<>
-			<StatusBar />
+			<StatusBar barStyle={'light-content'} />
 			<AppRootStackNavigation />
 		</>
 	)

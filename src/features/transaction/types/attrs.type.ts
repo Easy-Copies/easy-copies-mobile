@@ -1,24 +1,16 @@
 // Types
-import { TStoreForm } from './transaction.type'
+import { TTransactionForm } from './transaction.type'
 import { IAppPaginationQuery } from '@/features/app/types'
 
-export interface IStoreAttrsIndex {
+export interface ITransactionAttrsIndex {
 	params?: IAppPaginationQuery
 }
 
-export interface IStoreAttrsStore {
-	body: TStoreForm
+export interface ITransactionAttrsStore {
+	params: { storeId: string }
+	body: TTransactionForm
 }
 
-export interface IStoreAttrsShow {
-	params: { id: string }
-}
-
-export interface IStoreAttrsUpdate {
-	params: { id: string }
-	body: TStoreForm
-}
-
-export interface IStoreAttrsDestroy {
+export interface ITransactionAttrsShow {
 	params: { id: string }
 }

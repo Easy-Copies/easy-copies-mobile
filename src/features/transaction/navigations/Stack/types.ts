@@ -8,5 +8,6 @@ export type TTransactionStackNavigationParams = {
 	[E_TRANSACTION_STACK_NAVIGATION.TRANSACTION_CREATE]: {
 		storeId: string
 		storeService: EStoreServiceName
+		storePricePerSheet: number
 	}
 }

@@ -6,8 +6,8 @@ export const TRANSACTION_CREATE_FORM: TTransactionForm = {
 	storeService: EStoreServiceName.Laminating,
 	paperType: '',
 	inkType: '',
-	sheetLength: 0,
-	pickupDate: '',
+	sheetLength: null,
+	pickupDate: new Date(),
 	responsiblePerson: '',
 	description: '',
 	files: []

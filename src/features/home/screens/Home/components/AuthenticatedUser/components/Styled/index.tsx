@@ -4,9 +4,12 @@ import styled from 'styled-components'
 // Components
 import { AppView } from '@/features/app/components'
 
+// React Native
+import { Dimensions } from 'react-native'
+
 export const StyledWrapper = styled(AppView)`
 	background-color: ${props => props.theme.colors.primary};
-	height: 200px;
+	height: ${() => Dimensions.get('screen').width / 2.7}px;
 	padding-left: 35px;
 	padding-right: 35px;
 	border-bottom-left-radius: 50px;

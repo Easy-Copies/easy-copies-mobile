@@ -1,6 +1,6 @@
 // Interfaces
 import { IAppResponsePagination, IAppResponse } from '@/features/app/types'
-import { IStore } from './transaction.type'
+import { ITransaction } from './transaction.type'
 
-export type IStoreResponseList = IAppResponsePagination<IStore[]>
-export type IStoreResponseDetail = IAppResponse<IStore>
+export type ITransactionResponseList = IAppResponsePagination<ITransaction[]>
+export type ITransactionResponseDetail = IAppResponse<ITransaction>

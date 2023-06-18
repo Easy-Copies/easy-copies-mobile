@@ -1,5 +1,5 @@
 // React
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 // Components
 import {
@@ -8,7 +8,10 @@ import {
 	AppSelect,
 	AppView,
 	AppText,
-	AppInput
+	AppInput,
+	AppFileUpload,
+	useAppToast,
+	AppAlertDialog
 } from '@/features/app/components'
 import { StyledStickyBottom } from './components'
 
@@ -16,7 +19,7 @@ import { StyledStickyBottom } from './components'
 import { ScrollView } from 'native-base'
 
 // React Hook Form
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, useWatch } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
@@ -27,14 +30,20 @@ import { TRANSACTION_CREATE_FORM } from '@/features/transaction/constants/transa
 import { useTranslation } from 'react-i18next'
 
 // React Navigation
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 // Types
 import { TTransactionCreateScreenProps } from '@/features/transaction/screens/TransactionCreate/types'
 import { TTransactionForm } from '@/features/transaction/types'
 
-// Utils
-import { appOnlyNumber } from '@/features/app/utils/app.utils'
+// Redux
+import { useTransaction_storeMutation } from '@/features/transaction/redux'
+
+// Constants
+import {
+	E_APP_BOTTOM_TAB_NAVIGATION,
+	E_APP_STACK_NAVIGATION
+} from '@/features/app/constants'
 
 // Form Validation
 const formSchema = yup.object({
@@ -44,28 +53,40 @@ const formSchema = yup.object({
 	sheetLength: yup.number().required(),
 	pickupDate: yup.string().required(),
 	responsiblePerson: yup.string().required(),
-	description: yup.string().required(),
-	files: yup.array().of(
-		yup.object().shape({
-			name: yup.string().required(),
-			format: yup.string().required(),
-			size: yup.number().required(),
-			file: yup.string().required()
-		})
-	)
+	description: yup.string(),
+	files: yup
+		.array()
+		.of(
+			yup.object().shape({
+				name: yup.string().required(),
+				format: yup.string().required(),
+				size: yup.number().required(),
+				file: yup.string().required()
+			})
+		)
+		.min(1)
 })
 
 const TransactionForm = memo(() => {
+	// Common State
+	const [dialogOptions, setDialogOptions] = useState<{
+		isConfirmationOpen: boolean
+	}>({ isConfirmationOpen: false })
+
 	// Translation
 	const { t } = useTranslation()
 
 	// Route
 	const route = useRoute<TTransactionCreateScreenProps['route']>()
 
+	// Navigation
+	const navigation =
+		useNavigation<TTransactionCreateScreenProps['navigation']>()
+
 	// Form
 	const {
 		control,
-		formState: { errors },
+		formState: { errors, isValid },
 		handleSubmit
 	} = useForm({
 		defaultValues: {
@@ -75,6 +96,32 @@ const TransactionForm = memo(() => {
 		mode: 'all',
 		resolver: yupResolver(formSchema)
 	})
+	const watchSheetLength = useWatch({ control, name: 'sheetLength' })
+
+	// RTK
+	const [createTransaction, { isLoading: isCreateTransactionLoading }] =
+		useTransaction_storeMutation()
+
+	// Toast
+	const toast = useAppToast()
+
+	/**
+	 * @description Handle dialog
+	 *
+	 * @param {string} type
+	 * @param {boolean} value
+	 *
+	 * @return {void} void
+	 */
+	const handleDialog = useCallback(
+		(type: keyof typeof dialogOptions, value: boolean) => {
+			setDialogOptions(previousDialogOptions => ({
+				...previousDialogOptions,
+				[type]: value
+			}))
+		},
+		[]
+	)
 
 	/**
 	 * @description Handle submit
@@ -86,18 +133,38 @@ const TransactionForm = memo(() => {
 	const onSubmit = useCallback(
 		async (form: TTransactionForm): Promise<void> => {
 			try {
-				console.log('form', form)
+				const createTransactionResponse = await createTransaction({
+					params: { storeId: route.params.storeId },
+					body: form
+				}).unwrap()
+
+				// Show Toast
+				toast.show({ description: createTransactionResponse.message })
+
+				// Navigate to home
+				navigation.navigate(E_APP_STACK_NAVIGATION.APP, {
+					screen: E_APP_BOTTOM_TAB_NAVIGATION.HOME
+				})
 			} catch (_) {
 				//
 			}
 		},
-		[]
+		[createTransaction, route.params.storeId, toast, navigation]
 	)
+
+	/**
+	 * @description Submit confirmation
+	 *
+	 * @return {void} void
+	 */
+	const onSubmitConfirmation = useCallback(() => {
+		handleDialog('isConfirmationOpen', true)
+	}, [handleDialog])
 
 	return (
 		<>
 			{/* Form */}
-			<ScrollView>
+			<ScrollView marginBottom={'90px'}>
 				<AppContainer>
 					{/* Paper Type */}
 					<Controller
@@ -128,7 +195,10 @@ const TransactionForm = memo(() => {
 									error={errors.inkType}
 									items={[
 										{ label: t('app.inkType.color'), value: 'Color' },
-										{ label: t('app.inkType.blackWhite'), value: 'BlackWhite' }
+										{
+											label: t('app.inkType.blackWhite'),
+											value: 'BlackWhite'
+										}
 									]}
 									inputLabel={'transaction.form.inkType'}
 								/>
@@ -142,20 +212,17 @@ const TransactionForm = memo(() => {
 						name='sheetLength'
 						render={({ field: { onChange, value, ...fieldRest } }) => {
 							return (
-								<AppInput
+								<AppSelect
 									{...fieldRest}
-									value={value.toString()}
-									onChangeText={value => {
-										if (appOnlyNumber(value)) {
-											if (Number(value) > 999) {
-												onChange(999)
-											} else {
-												onChange(Number(value))
-											}
-										}
-									}}
+									selectedValue={value?.toString()}
+									onValueChange={onChange}
+									items={[...Array(10).keys()]
+										.filter(length => length !== 0)
+										.map(sheetLength => ({
+											label: sheetLength.toString(),
+											value: sheetLength.toString()
+										}))}
 									error={errors.sheetLength}
-									keyboardType='numeric'
 									inputLabel={'transaction.form.sheetLength'}
 								/>
 							)
@@ -170,19 +237,59 @@ const TransactionForm = memo(() => {
 							return (
 								<AppInput
 									{...fieldRest}
-									value={value.toString()}
-									onChangeText={value => {
-										if (appOnlyNumber(value)) {
-											if (Number(value) > 999) {
-												onChange(999)
-											} else {
-												onChange(Number(value))
-											}
-										}
-									}}
+									onChangeDateTime={onChange}
+									dateValue={value}
 									inputType={'date'}
 									error={errors.pickupDate}
 									inputLabel={'transaction.form.pickupDate'}
+								/>
+							)
+						}}
+					/>
+
+					{/* Responsible Name */}
+					<Controller
+						control={control}
+						name='responsiblePerson'
+						render={({ field: { onChange, ...fieldRest } }) => {
+							return (
+								<AppInput
+									{...fieldRest}
+									onChangeText={onChange}
+									error={errors.responsiblePerson}
+									inputLabel={'transaction.form.responsiblePerson'}
+								/>
+							)
+						}}
+					/>
+
+					{/* Upload Files */}
+					<Controller
+						control={control}
+						name='files'
+						render={({ field: { onChange, value } }) => {
+							return (
+								<AppFileUpload
+									files={value}
+									onChangeFile={onChange}
+									error={errors.responsiblePerson}
+									inputLabel={'transaction.form.files'}
+								/>
+							)
+						}}
+					/>
+
+					{/* Responsible Name */}
+					<Controller
+						control={control}
+						name='description'
+						render={({ field: { onChange, ...fieldRest } }) => {
+							return (
+								<AppInput
+									{...fieldRest}
+									onChangeText={onChange}
+									error={errors.responsiblePerson}
+									inputLabel={'transaction.form.description'}
 								/>
 							)
 						}}
@@ -211,7 +318,7 @@ const TransactionForm = memo(() => {
 							{t('app.totalPrice')}
 						</AppText>
 						<AppText fontSize={18} lineHeight={22.5} fontWeight={'700'}>
-							Rp 28000
+							Rp {Number(watchSheetLength) * route.params.storePricePerSheet}
 						</AppText>
 					</AppView>
 					{/* End Total Price */}
@@ -222,14 +329,31 @@ const TransactionForm = memo(() => {
 						height={'40px'}
 						backgroundColor={'primary.400'}
 						_text={{ textTransform: 'none' }}
-						onPress={handleSubmit(onSubmit)}
+						onPress={onSubmitConfirmation}
+						isDisabled={!isValid}
+						isLoading={isCreateTransactionLoading}
 					>
 						{t('transaction.makeOrder')}
 					</AppButton>
 					{/* End Confirmation Button */}
 				</AppView>
 			</StyledStickyBottom>
-			{/* Sticky Bottom Bar */}
+			{/* End Sticky Bottom Bar */}
+
+			{/* Alert Confirmation */}
+			<AppAlertDialog
+				isOpen={dialogOptions.isConfirmationOpen}
+				title={'Transaction Confirmation'}
+				description={
+					'Are you sure want to create transaction? This will be going to Payment Process'
+				}
+				onClose={() => handleDialog('isConfirmationOpen', false)}
+				onConfirm={() => {
+					handleDialog('isConfirmationOpen', false)
+					handleSubmit(onSubmit)()
+				}}
+			/>
+			{/* End Alert Confirmation */}
 		</>
 	)
 })

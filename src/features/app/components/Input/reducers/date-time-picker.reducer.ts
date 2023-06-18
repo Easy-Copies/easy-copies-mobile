@@ -34,7 +34,6 @@ export const datePickerOptionsReducer = (
 		case EDatePickerOptionsActionType.SET_MODE:
 			return { ...state, mode: payload }
 		case EDatePickerOptionsActionType.SET_SHOW:
-			console.log('A')
 			return { ...state, show: payload }
 		default:
 			return state

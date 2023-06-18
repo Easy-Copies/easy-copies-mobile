@@ -7,7 +7,7 @@
 			"sheetLength": "Jumlah Halaman",
 			"pickupDate": "Tanggal Pengambilan",
 			"responsiblePerson": "Nama Orang Pengambil",
-			"description": "Keterangan",
+			"description": "Keterangan (Opsional)",
 			"files": "File"
 		}
 	}

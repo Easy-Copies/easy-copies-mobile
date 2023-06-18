@@ -14,7 +14,7 @@ import {
 // Rtk
 import { emptySplitApi } from '@/features/app/redux'
 
-export const storeApi = emptySplitApi.injectEndpoints({
+export const storeServiceApi = emptySplitApi.injectEndpoints({
 	endpoints: builder => ({
 		storeService_index: builder.query<
 			IStoreServiceResponseList,
@@ -70,4 +70,4 @@ export const {
 	useStoreService_storeMutation,
 	useStoreService_updateMutation,
 	useStoreService_destroyMutation
-} = storeApi
+} = storeServiceApi

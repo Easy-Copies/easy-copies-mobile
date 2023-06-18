@@ -62,8 +62,8 @@ export type TTransactionForm = {
 	storeService: EStoreServiceName
 	paperType: string
 	inkType: string
-	sheetLength: number
-	pickupDate: string
+	sheetLength: number | null
+	pickupDate: Date
 	responsiblePerson: string
 	description: string
 	files: {
