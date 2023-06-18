@@ -9,7 +9,6 @@ import { Image } from 'native-base'
 
 export const StyledWrapper = styled(AppView)`
 	background-color: ${props => props.theme.colors.primary};
-	height: 105px;
 	font-size: 20px;
 	font-weight: 600;
 	line-height: 25px;

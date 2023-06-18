@@ -12,6 +12,11 @@
 		"start": "Mulai",
 		"next": "Selanjutnya",
 		"more": "Selengkapnya",
+		"totalPrice": "Total Harga",
+		"inkType": {
+			"color": "Berwarna",
+			"blackWhite": "Hitam Putih"
+		},
 		"intro": {
 			"easyPrint": "Kemudahan Printing Dengan Satu Ketukan",
 			"features": {
