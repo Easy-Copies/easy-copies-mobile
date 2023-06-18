@@ -25,7 +25,9 @@ import { TStoreDetailScreenProps } from './types'
 // Native Base
 import { ScrollView, Divider, CheckIcon } from 'native-base'
 import {
+	E_APP_BOTTOM_TAB_NAVIGATION,
 	E_APP_STACK_NAVIGATION,
+	E_STORE_STACK_NAVIGATION,
 	E_TRANSACTION_STACK_NAVIGATION
 } from '@/features/app/constants'
 
@@ -179,14 +181,18 @@ const StoreDetailScreen = memo(
 								backgroundColor={'primary.400'}
 								_text={{ textTransform: 'none' }}
 								onPress={() =>
-									navigation.navigate(E_APP_STACK_NAVIGATION.TRANSACTION, {
-										screen: E_TRANSACTION_STACK_NAVIGATION.TRANSACTION_CREATE,
+									navigation.push(E_APP_STACK_NAVIGATION.APP, {
+										screen: E_APP_BOTTOM_TAB_NAVIGATION.TRANSACTION,
 										params: {
-											storeId: route.params.id,
-											storeService:
-												selectedStoreService.storeServiceName as EStoreServiceName,
-											storePricePerSheet:
-												selectedStoreService.storePricePerSheet
+											screen: E_TRANSACTION_STACK_NAVIGATION.TRANSACTION_CREATE,
+											params: {
+												storeId: route.params.id,
+												storeService:
+													selectedStoreService.storeServiceName as EStoreServiceName,
+												storePricePerSheet:
+													selectedStoreService.storePricePerSheet,
+												from: E_STORE_STACK_NAVIGATION.STORE_DETAIL
+											}
 										}
 									})
 								}

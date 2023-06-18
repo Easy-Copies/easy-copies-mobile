@@ -1,9 +1,14 @@
 // Types
-import { TTransactionForm } from './transaction.type'
+import {
+	ETransactionApprovalStatus,
+	TTransactionForm
+} from './transaction.type'
 import { IAppPaginationQuery } from '@/features/app/types'
 
 export interface ITransactionAttrsIndex {
-	params?: IAppPaginationQuery
+	params?: {
+		status: ETransactionApprovalStatus | undefined
+	} & IAppPaginationQuery
 }
 
 export interface ITransactionAttrsStore {

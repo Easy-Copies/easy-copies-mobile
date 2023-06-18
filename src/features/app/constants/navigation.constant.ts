@@ -46,5 +46,6 @@ export enum E_STORE_STACK_NAVIGATION {
 }
 
 export enum E_TRANSACTION_STACK_NAVIGATION {
+	TRANSACTION_LIST = 'TransactionList',
 	TRANSACTION_CREATE = 'TransactionCreate'
 }

@@ -2,7 +2,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // Store Screens
-import { TransactionCreateScreen } from '@/features/transaction/screens'
+import {
+	TransactionListScreen,
+	TransactionCreateScreen
+} from '@/features/transaction/screens'
 
 // Constants
 import { E_TRANSACTION_STACK_NAVIGATION } from '@/features/app/constants'
@@ -16,7 +19,14 @@ import { AppNavigationHeader } from '@/features/app/components/NavigationHeader'
 const Stack = createNativeStackNavigator<TTransactionStackNavigationParams>()
 const TransactionStackNavigation = (): JSX.Element => {
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			initialRouteName={E_TRANSACTION_STACK_NAVIGATION.TRANSACTION_LIST}
+		>
+			<Stack.Screen
+				name={E_TRANSACTION_STACK_NAVIGATION.TRANSACTION_LIST}
+				component={TransactionListScreen}
+				options={{ headerShown: false }}
+			/>
 			<Stack.Screen
 				name={E_TRANSACTION_STACK_NAVIGATION.TRANSACTION_CREATE}
 				component={TransactionCreateScreen}
@@ -27,7 +37,6 @@ const TransactionStackNavigation = (): JSX.Element => {
 
 						return (
 							<AppNavigationHeader
-								isFromSomeWhere={props?.back !== undefined}
 								title={params.storeService}
 								navigation={props.navigation}
 							/>

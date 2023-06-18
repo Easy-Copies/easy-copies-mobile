@@ -142,7 +142,7 @@ const TransactionForm = memo(() => {
 				toast.show({ description: createTransactionResponse.message })
 
 				// Navigate to home
-				navigation.navigate(E_APP_STACK_NAVIGATION.APP, {
+				navigation.replace(E_APP_STACK_NAVIGATION.APP, {
 					screen: E_APP_BOTTOM_TAB_NAVIGATION.HOME
 				})
 			} catch (_) {

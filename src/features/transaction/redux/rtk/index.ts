@@ -24,7 +24,26 @@ export const transactionApi = emptySplitApi.injectEndpoints({
 			query: payload => ({
 				url: 'v1/transactions',
 				params: payload?.params
-			})
+			}),
+			transformResponse: (
+				response: ITransactionResponseList
+			): ITransactionResponseList => {
+				return {
+					...response,
+					result: {
+						...response.result,
+						rows: response.result.rows.map(row => ({
+							...row,
+							pickupDate: moment(row.pickupDate)
+								.format('DD MMMM YYYY - HH:mm')
+								.toString(),
+							createdAt: moment(row.createdAt)
+								.format('DD MMMM YYYY - HH:mm')
+								.toString()
+						}))
+					}
+				}
+			}
 		}),
 		transaction_show: builder.query<
 			ITransactionResponseDetail,

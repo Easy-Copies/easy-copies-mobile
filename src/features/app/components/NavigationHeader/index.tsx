@@ -16,7 +16,7 @@ import { useTheme, Pressable } from 'native-base'
 import { TAppNavigationHeader } from './types'
 
 const AppNavigationHeader = memo(
-	({ isFromSomeWhere, title, navigation }: TAppNavigationHeader) => {
+	({ title, navigation }: TAppNavigationHeader) => {
 		// Native Base Theme
 		const themeNativeBase = useTheme()
 
@@ -40,8 +40,8 @@ const AppNavigationHeader = memo(
 							justifyContent={'space-between'}
 						>
 							{/* Left Side */}
-							{isFromSomeWhere && (
-								<Pressable onPress={() => navigation.goBack()}>
+							{navigation.canGoBack() && (
+								<Pressable onPress={() => navigation.pop()}>
 									<StyledImageBackButton alt={'back'} />
 								</Pressable>
 							)}

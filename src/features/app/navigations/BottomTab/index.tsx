@@ -4,6 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 // Home Navigation
 import { HomeStackNavigation } from '@/features/home/navigations'
 
+// Transaction Navigation
+import { TransactionStackNavigation } from '@/features/transaction/navigations'
+
 // i18n
 import { useTranslation } from 'react-i18next'
 
@@ -25,6 +28,14 @@ const AppBottomTabNavigation = (): JSX.Element => {
 				component={HomeStackNavigation}
 				options={{
 					title: t('app.menu.home') as string,
+					headerShown: false
+				}}
+			/>
+			<BottomTab.Screen
+				name={E_APP_BOTTOM_TAB_NAVIGATION.TRANSACTION}
+				component={TransactionStackNavigation}
+				options={{
+					title: t('app.menu.transaction') as string,
 					headerShown: false
 				}}
 			/>
