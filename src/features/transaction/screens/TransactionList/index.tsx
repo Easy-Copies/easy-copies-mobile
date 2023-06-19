@@ -1,14 +1,21 @@
 // React
 import { memo, useCallback, useEffect, useState } from 'react'
 
+import { Platform } from 'react-native'
+
 // Components
 import {
 	AppContainer,
 	AppText,
 	AppView,
-	AppWrapper
+	AppWrapper,
+	AppButton
 } from '@/features/app/components'
-import { StyledTransactionCard, StyledTransactionStatus } from './components'
+import {
+	StyledTransactionCard,
+	StyledTransactionStatus,
+	TransactionPayDialog
+} from './components'
 
 // Native Base
 import { Divider, FlatList, ScrollView } from 'native-base'
@@ -20,10 +27,14 @@ import { ETransactionApprovalStatus } from '@/features/transaction/types'
 import { useLazyTransaction_indexQuery } from '@/features/transaction/redux'
 
 const TransactionListScreen = memo(() => {
-	// Common Status
+	// Common State
 	const [currentTransactionStatus, setCurrentTransactionStatus] = useState<
 		ETransactionApprovalStatus | undefined
 	>(undefined)
+	const [currentTransactionId, setCurrentTransactionId] = useState<string>('')
+	const [dialogOptions, setDialogOptions] = useState<{
+		isPayOpen: boolean
+	}>({ isPayOpen: false })
 
 	// RTK
 	const [
@@ -49,6 +60,24 @@ const TransactionListScreen = memo(() => {
 			//
 		}
 	}, [getTransactionList, currentTransactionStatus])
+
+	/**
+	 * @description Handle dialog
+	 *
+	 * @param {string} type
+	 * @param {boolean} value
+	 *
+	 * @return {void} void
+	 */
+	const handleDialog = useCallback(
+		(type: keyof typeof dialogOptions, value: boolean) => {
+			setDialogOptions(previousDialogOptions => ({
+				...previousDialogOptions,
+				[type]: value
+			}))
+		},
+		[]
+	)
 
 	// Do when user came to this screen
 	useEffect(() => {
@@ -96,12 +125,15 @@ const TransactionListScreen = memo(() => {
 					transactionList?.result && (
 						<FlatList
 							showsVerticalScrollIndicator={false}
+							contentContainerStyle={{
+								paddingBottom: Platform.OS === 'android' ? 10 : undefined
+							}}
 							data={transactionList.result?.rows}
 							keyExtractor={item => item.id}
 							refreshing={isTransactionListFetching}
 							onRefresh={() => fetchTransactionList()}
 							renderItem={({ item }) => (
-								<StyledTransactionCard marginBottom={'20px'}>
+								<StyledTransactionCard marginBottom={'10px'}>
 									{/* Title And Status */}
 									<AppView
 										flexDirection={'row'}
@@ -138,12 +170,43 @@ const TransactionListScreen = memo(() => {
 											Tanggal Ambil: {item.pickupDate}
 										</AppText>
 
-										<AppText fontSize={9} marginTop={'10px'}>
-											Harga
-										</AppText>
-										<AppText fontSize={12} fontWeight={'700'} lineHeight={15}>
-											Rp. {item.totalPrice}
-										</AppText>
+										<AppView
+											alignItems={'center'}
+											justifyContent={'space-between'}
+											flexDirection={'row'}
+											marginTop={'10px'}
+										>
+											<AppView>
+												<AppText fontSize={9}>Harga</AppText>
+												<AppText
+													fontSize={12}
+													fontWeight={'700'}
+													lineHeight={15}
+												>
+													Rp. {item.totalPrice}
+												</AppText>
+											</AppView>
+
+											{item.status ===
+												ETransactionApprovalStatus.WaitingPayment && (
+												<AppView>
+													<AppButton
+														backgroundColor={'primary.400'}
+														width={'150px'}
+														height={'30px'}
+														_text={{
+															fontSize: '10px'
+														}}
+														onPress={() => {
+															setCurrentTransactionId(item.id)
+															handleDialog('isPayOpen', true)
+														}}
+													>
+														Upload Bukti Bayar
+													</AppButton>
+												</AppView>
+											)}
+										</AppView>
 									</AppView>
 									{/* End Description and Other Details */}
 								</StyledTransactionCard>
@@ -152,6 +215,19 @@ const TransactionListScreen = memo(() => {
 					)
 				)}
 				{/* End Transaction List */}
+
+				{/* Transaction Pay Dialog */}
+				<TransactionPayDialog
+					isOpen={dialogOptions.isPayOpen}
+					transactionId={currentTransactionId}
+					onClose={() => {
+						setCurrentTransactionId('')
+
+						handleDialog('isPayOpen', false)
+					}}
+					onConfirm={() => fetchTransactionList()}
+				/>
+				{/* End Transaction Pay Dialog  */}
 			</AppContainer>
 		</AppWrapper>
 	)

@@ -1,4 +1,5 @@
 // Types
+import { TAppFile } from '@/features/app/types'
 import { EStoreServiceName } from '@/features/store/children/store-service/types/store-service.type'
 
 export interface ITransaction {
@@ -72,4 +73,22 @@ export type TTransactionForm = {
 		size: number
 		file: string
 	}[]
+}
+
+export type TTransactionPayForm = {
+	senderName: string
+	bankName: string
+	accountNumber: string
+	file: TAppFile | null
+}
+
+export type TTransactionPayment = {
+	id: string
+	userId: string
+	transactionId: string
+	senderName: string
+	bankName: string
+	accountNumber: string
+	file: TAppFile
+	createdAt: string
 }

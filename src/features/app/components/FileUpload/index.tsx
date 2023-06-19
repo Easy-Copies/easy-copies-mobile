@@ -22,8 +22,19 @@ import DocumentPicker from 'react-native-document-picker'
 // React Native File System
 import FileSystem from 'react-native-fs'
 
+// Types
+import { TAppFile } from '@/features/app/types'
+
 const AppFileUpload = memo(
-	({ inputLabel, files, onChangeFile, error }: IAppSelectProps) => {
+	({
+		inputLabel,
+		file,
+		files,
+		onChangeFile,
+		onChangeFiles,
+		isMultiple,
+		error
+	}: IAppSelectProps) => {
 		// Translation
 		const { t } = useTranslation()
 
@@ -34,25 +45,39 @@ const AppFileUpload = memo(
 		 */
 		const onPickFile = useCallback(async () => {
 			try {
-				const selectedFiles = await DocumentPicker.pick({
-					allowMultiSelection: true
-				})
-				const selectedFilesBase64: typeof files = []
+				if (isMultiple && onChangeFiles) {
+					const selectedFiles = await DocumentPicker.pick({
+						allowMultiSelection: true
+					})
 
-				for (const selectedFile of selectedFiles) {
-					selectedFilesBase64.push({
+					const selectedFilesBase64: typeof files = []
+
+					for (const selectedFile of selectedFiles) {
+						selectedFilesBase64.push({
+							format: selectedFile.type?.split('/')?.[1] as string,
+							name: selectedFile.name?.split('.')?.[0] as string,
+							file: await FileSystem.readFile(selectedFile.uri, 'base64'),
+							size: selectedFile.size as number
+						})
+					}
+					onChangeFiles(selectedFilesBase64)
+				}
+
+				if (!isMultiple && onChangeFile) {
+					const selectedFile = await DocumentPicker.pickSingle()
+					const mapFile: TAppFile = {
 						format: selectedFile.type?.split('/')?.[1] as string,
 						name: selectedFile.name?.split('.')?.[0] as string,
 						file: await FileSystem.readFile(selectedFile.uri, 'base64'),
 						size: selectedFile.size as number
-					})
-				}
+					}
 
-				onChangeFile(selectedFilesBase64)
+					onChangeFile(mapFile)
+				}
 			} catch (_) {
 				//
 			}
-		}, [onChangeFile])
+		}, [onChangeFile, onChangeFiles, isMultiple])
 
 		return (
 			<FormControl isInvalid={Boolean(error)} marginBottom={2.5} isReadOnly>
@@ -83,7 +108,7 @@ const AppFileUpload = memo(
 				</StyledWrapper>
 
 				<AppView>
-					{files.map(file => (
+					{!isMultiple && file && (
 						<AppView
 							key={file.file}
 							marginBottom={'5px'}
@@ -93,7 +118,20 @@ const AppFileUpload = memo(
 								{file.name}.{file.format}
 							</AppText>
 						</AppView>
-					))}
+					)}
+
+					{isMultiple &&
+						files?.map(file => (
+							<AppView
+								key={file.file}
+								marginBottom={'5px'}
+								flexDirection={'column'}
+							>
+								<AppText fontSize={12} fontWeight={'500'} lineHeight={15}>
+									{file.name}.{file.format}
+								</AppText>
+							</AppView>
+						))}
 				</AppView>
 
 				{error?.message?.key && (

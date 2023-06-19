@@ -270,8 +270,9 @@ const TransactionForm = memo(() => {
 						render={({ field: { onChange, value } }) => {
 							return (
 								<AppFileUpload
+									isMultiple
 									files={value}
-									onChangeFile={onChange}
+									onChangeFiles={onChange}
 									error={errors.responsiblePerson}
 									inputLabel={'transaction.form.files'}
 								/>

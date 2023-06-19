@@ -2,10 +2,7 @@
 import styled from 'styled-components'
 
 // Native Base
-import { Pressable } from 'native-base'
-
-// Components
-import { AppView } from '@/features/app/components'
+import { Image, Pressable } from 'native-base'
 
 export const StyledStoreCard = styled(Pressable)`
 	background-color: ${props => props.theme.colors.lightBlue};
@@ -15,7 +12,8 @@ export const StyledStoreCard = styled(Pressable)`
 	padding: 10px;
 `
 
-export const StyledStorePhoto = styled(AppView)`
+export const StyledStorePhoto = styled(Image)`
+	object-fit: cover;
 	background-color: ${props => props.theme.colors.gray};
 	width: 60px;
 	height: 60px;

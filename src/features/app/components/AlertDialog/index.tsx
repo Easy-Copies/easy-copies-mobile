@@ -15,10 +15,14 @@ const AppAlertDialog = memo(
 		isOpen,
 		title,
 		description,
+		children,
 		cancelTitle,
 		yesTitle,
 		onClose,
-		onConfirm
+		onConfirm,
+		noCancelButton,
+		isYesDisabled,
+		isYesLoading
 	}: TAppAlertDialogProps) => {
 		const ref = useRef(null)
 
@@ -30,19 +34,28 @@ const AppAlertDialog = memo(
 					leastDestructiveRef={ref}
 				>
 					<AlertDialog.Content>
-						<AlertDialog.CloseButton />
-						<AlertDialog.Header>{title}</AlertDialog.Header>
-						<AlertDialog.Body>{description}</AlertDialog.Body>
+						{!isYesLoading && <AlertDialog.CloseButton />}
+						{title && <AlertDialog.Header>{title}</AlertDialog.Header>}
+						<AlertDialog.Body>{children || description}</AlertDialog.Body>
 						<AlertDialog.Footer>
 							<Button.Group space={2}>
+								{!noCancelButton ? (
+									<AppButton
+										variant='unstyled'
+										colorScheme='coolGray'
+										onPress={onClose}
+									>
+										{cancelTitle || 'Cancel'}
+									</AppButton>
+								) : (
+									<></>
+								)}
 								<AppButton
-									variant='unstyled'
-									colorScheme='coolGray'
-									onPress={onClose}
+									onPress={onConfirm}
+									backgroundColor={'primary.400'}
+									isDisabled={isYesDisabled}
+									isLoading={isYesLoading}
 								>
-									{cancelTitle || 'Cancel'}
-								</AppButton>
-								<AppButton onPress={onConfirm} backgroundColor={'primary.400'}>
 									{yesTitle || 'Yes'}
 								</AppButton>
 							</Button.Group>

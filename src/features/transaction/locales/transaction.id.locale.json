@@ -9,6 +9,12 @@
 			"responsiblePerson": "Nama Orang Pengambil",
 			"description": "Keterangan (Opsional)",
 			"files": "File"
+		},
+		"formPay": {
+			"senderName": "Nama Pengirim",
+			"bankName": "Nama Bank",
+			"accountNumber": "Nomor Rekening",
+			"photoUpload": "Upload Photo"
 		}
 	}
 }

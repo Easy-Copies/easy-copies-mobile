@@ -38,7 +38,7 @@ const HomeNearbyStore = memo(() => {
 
 	// Do when first came to this component
 	useEffect(() => {
-		getStoreList()
+		getStoreList({}, false)
 	}, [getStoreList])
 
 	return (
@@ -78,13 +78,28 @@ const HomeNearbyStore = memo(() => {
 			{/* Store List */}
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 				{storeList?.result?.rows?.map(row => (
-					<StyledStoreCard marginRight={'15px'} key={row.id}>
+					<StyledStoreCard
+						marginRight={'15px'}
+						key={row.id}
+						onPress={() =>
+							navigation.navigate(E_APP_STACK_NAVIGATION.STORE, {
+								screen: E_STORE_STACK_NAVIGATION.STORE_DETAIL,
+								params: {
+									id: row.id,
+									name: row.name
+								}
+							})
+						}
+					>
 						<AppView
 							flexDirection={'row'}
 							justifyContent={'center'}
 							alignItems={'center'}
 						>
-							<StyledStorePhoto />
+							<StyledStorePhoto
+								alt={row.name}
+								source={{ uri: row.storePhoto }}
+							/>
 
 							<AppView flex={1} marginLeft={10}>
 								<AppText

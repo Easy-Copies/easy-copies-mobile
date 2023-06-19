@@ -23,3 +23,10 @@ export interface IAppCommonPaginationQuery {
 export type TAppCommonPagination = 'limit' | 'page' | 'sort'
 
 export type TAppCommonValidationError = { key: string }
+
+export type TAppFile = {
+	name: string
+	format: string
+	size: number
+	file: string
+}
