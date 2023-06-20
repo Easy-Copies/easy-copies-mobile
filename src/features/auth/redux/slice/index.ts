@@ -6,7 +6,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // Types
 import { IRootState } from '@/plugins/redux/reducer'
-import { IAuth } from '@/features/auth/types'
+import { IAuth, IAuthRole } from '@/features/auth/types'
+import { EAppPermission } from '@/features/app/types'
 
 const initialState: IAuthSliceState = {
 	isAuthenticated: false,
@@ -60,5 +61,24 @@ export const authGetRefreshToken = (state: IRootState) =>
 	state.auth.tokens.refreshToken
 export const authGetAuthenticatedUserName = (state: IRootState) =>
 	state.auth.authenticatedUser?.name || ''
+export const authGetIsCanDoTransactionApproval = (state: IRootState) => {
+	if (state.auth.authenticatedUser) {
+		const findActiveRole = state.auth.authenticatedUser.roles.find(
+			role => role.isActive
+		) as IAuthRole | undefined
+		if (findActiveRole?.permissions?.length === 0) return false
+
+		const rolePermission = findActiveRole?.permissions?.find(
+			permission =>
+				permission.code === EAppPermission.TRANSACTION_MANAGEMENT_APPROVAL
+		)
+
+		if (!rolePermission) return false
+
+		return rolePermission.actions.create && rolePermission.actions.update
+	} else {
+		return false
+	}
+}
 
 export default authSlice.reducer

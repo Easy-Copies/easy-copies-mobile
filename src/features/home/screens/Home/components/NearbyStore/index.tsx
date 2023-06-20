@@ -130,7 +130,11 @@ const HomeNearbyStore = memo(() => {
 									{row.address}
 								</AppText>
 								<AppText fontSize={8} lineHeight={15} fontWeight={'500'}>
-									{row.isOpen ? 'Buka' : 'Tutup'} | 06:00 - 18:00
+									<AppText color={row.isOpen ? 'green.400' : 'red.400'}>
+										{row.isOpen ? 'Buka' : 'Tutup'}
+									</AppText>
+									<AppText> | </AppText>
+									<AppText>06:00 - 18:00</AppText>
 								</AppText>
 							</AppView>
 						</AppView>

@@ -30,3 +30,13 @@ export type TAppFile = {
 	size: number
 	file: string
 }
+
+export enum EAppPermission {
+	USER_MANAGEMENT = 'User Management',
+	ROLE_MANAGEMENT = 'Role Management',
+	STORE_MANAGEMENT = 'Store Management',
+	STORE_MANAGEMENT_APPROVAL = 'Store Management Approval',
+	STORE_MANAGEMENT_SERVICE = 'Store Management Service',
+	TRANSACTION_MANAGEMENT = 'Transaction Management',
+	TRANSACTION_MANAGEMENT_APPROVAL = 'Transaction Management Approval'
+}

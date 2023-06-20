@@ -19,6 +19,7 @@ import {
 } from './features/app/redux'
 import {
 	authGetIsAuthenticated,
+	auth_HANDLE_AUTHENTICATED_USER,
 	useLazyAuth_meQuery
 } from './features/auth/redux'
 
@@ -56,13 +57,16 @@ const EntryPoint = (): JSX.Element => {
 		// eslint-disable-next-line
 		;(async () => {
 			try {
-				if (authIsAuthenticated && appIsInitialized)
-					await getAuthenticatedUser().unwrap()
+				if (authIsAuthenticated && appIsInitialized) {
+					const response = await getAuthenticatedUser().unwrap()
+
+					dispatch(auth_HANDLE_AUTHENTICATED_USER(response.result))
+				}
 			} catch (_) {
 				//
 			}
 		})()
-	}, [authIsAuthenticated, appIsInitialized, getAuthenticatedUser])
+	}, [authIsAuthenticated, appIsInitialized, getAuthenticatedUser, dispatch])
 
 	return (
 		<>

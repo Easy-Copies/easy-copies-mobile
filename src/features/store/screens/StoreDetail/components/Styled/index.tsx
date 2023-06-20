@@ -39,3 +39,11 @@ export const StyledStickyBottom = styled(AppView)`
 	padding-left: 20px;
 	padding-right: 20px;
 `
+
+export const StyledStoreStar = styled(Image).attrs({
+	source: require('@/assets/images/star-full.png'),
+	alt: 'rating'
+})`
+	width: 15px;
+	height: 15px;
+`

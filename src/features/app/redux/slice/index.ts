@@ -8,7 +8,7 @@ import {
 // Redux Toolkit
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-// Interfaces
+// Types
 import { IRootState } from '@/plugins/redux/reducer'
 
 // App Features

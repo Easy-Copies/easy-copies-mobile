@@ -56,7 +56,8 @@ export const authApi = emptySplitApi.injectEndpoints({
 		auth_me: builder.query<TAuthResponseMe, void>({
 			query: () => ({
 				url: '/v1/auth/me'
-			})
+			}),
+			keepUnusedDataFor: 0
 		}),
 		auth_verify: builder.mutation<TAuthResponseNull, IAuthAttrsVerify>({
 			query: ({ params, body }) => ({

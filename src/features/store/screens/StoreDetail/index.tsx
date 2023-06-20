@@ -12,7 +12,8 @@ import {
 import {
 	StyledStorePhoto,
 	StyledStoreServiceCard,
-	StyledStickyBottom
+	StyledStickyBottom,
+	StyledStoreStar
 } from './components'
 
 // Redux
@@ -74,14 +75,31 @@ const StoreDetailScreen = memo(
 							{/* Store Info */}
 							<AppContainer marginTop={'2px'} withoutHeight>
 								<AppView marginBottom={'10px'}>
-									<AppText
-										fontWeight={'600'}
-										lineHeight={25}
-										fontSize={20}
-										marginBottom={0.5}
+									<AppView
+										flexDirection={'row'}
+										alignItems={'center'}
+										justifyContent={'space-between'}
 									>
-										{storeDetail.result.name}
-									</AppText>
+										<AppText
+											fontWeight={'600'}
+											lineHeight={25}
+											fontSize={20}
+											marginBottom={0.5}
+										>
+											{storeDetail.result.name}
+										</AppText>
+
+										<AppView flexDirection={'row'} alignItems={'center'}>
+											<StyledStoreStar />
+											<AppText
+												fontWeight={'600'}
+												lineHeight={25}
+												marginBottom={0.5}
+											>
+												4.8
+											</AppText>
+										</AppView>
+									</AppView>
 									<AppText fontWeight={'400'} lineHeight={15} fontSize={12}>
 										{storeDetail.result.province?.name},{' '}
 										{storeDetail.result.regency?.name}

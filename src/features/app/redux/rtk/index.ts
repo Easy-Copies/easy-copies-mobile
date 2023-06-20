@@ -33,6 +33,10 @@ const baseQuery = fetchBaseQuery({
 		const token = rootState.auth.tokens.token
 
 		// Set request for coming from mobile to server
+		headers.set('Accept', 'application/json')
+		headers.set('Cache-Control', 'no-cache')
+		headers.set('Pragma', 'no-cache')
+		headers.set('Expires', '0')
 		headers.set('x-is-mobile', '1')
 
 		// Handle if you have any header send to the server
@@ -89,8 +93,6 @@ const baseQueryWithReAuth: BaseQueryFn<
 					api.dispatch(auth_HANDLE_LOGOUT())
 				}
 			} catch (_) {
-				console.log('CATCH')
-
 				api.dispatch(auth_HANDLE_LOGOUT())
 			} finally {
 				// release must be called once the mutex should be released again.
