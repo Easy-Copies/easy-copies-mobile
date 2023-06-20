@@ -29,8 +29,10 @@ const styledComponentsTheme = {
 		secondary: E_APP_COLORS.SECONDARY,
 		gray: E_APP_COLORS.GRAY,
 		lightGray: E_APP_COLORS.LIGHT_GRAY,
+		trueGray: E_APP_COLORS.TRUE_GRAY,
 		blue: E_APP_COLORS.BLUE,
-		lightBlue: E_APP_COLORS.LIGHT_BLUE
+		lightBlue: E_APP_COLORS.LIGHT_BLUE,
+		blueSky: E_APP_COLORS.BLUE_SKY
 	}
 }
 

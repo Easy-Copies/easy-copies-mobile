@@ -27,10 +27,11 @@ const HomeUserInfo = memo(() => {
 			<StyledWrapper>
 				<SafeAreaView>
 					<AppView
-						paddingTop={30}
+						paddingTop={'30px'}
 						paddingLeft={20}
 						paddingRight={20}
 						flexDirection={'row'}
+						justifyContent={'center'}
 						alignItems={'center'}
 					>
 						{/* Photo Profile */}

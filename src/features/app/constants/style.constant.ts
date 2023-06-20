@@ -3,8 +3,10 @@ export enum E_APP_COLORS {
 	SECONDARY = '#7081AA',
 	GRAY = '#D9D9D9',
 	LIGHT_GRAY = '#D2D2D2',
+	TRUE_GRAY = '#D4D4D4',
 	BLUE = '#7080AA',
-	LIGHT_BLUE = '#E7EDFF'
+	LIGHT_BLUE = '#E7EDFF',
+	BLUE_SKY = '#E7EEFF'
 }
 
 export enum E_APP_FONTS {

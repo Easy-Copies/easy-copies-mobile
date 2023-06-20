@@ -1,11 +1,12 @@
+// Types
+import { TAppFile } from '@/features/app/types'
+
 export interface IAppSelectProps {
 	inputLabel?: string
-	files: {
-		name: string
-		format: string
-		size: number
-		file: string
-	}[]
-	onChangeFile: (file: IAppSelectProps['files']) => void
+	isMultiple?: boolean
+	file?: TAppFile | null
+	files?: TAppFile[]
+	onChangeFile?: (file: IAppSelectProps['file']) => void
+	onChangeFiles?: (file: IAppSelectProps['files']) => void
 	error?: { message?: any; values?: { [key: string]: any } }
 }

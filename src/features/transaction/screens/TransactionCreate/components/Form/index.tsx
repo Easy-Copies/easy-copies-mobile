@@ -142,7 +142,7 @@ const TransactionForm = memo(() => {
 				toast.show({ description: createTransactionResponse.message })
 
 				// Navigate to home
-				navigation.navigate(E_APP_STACK_NAVIGATION.APP, {
+				navigation.replace(E_APP_STACK_NAVIGATION.APP, {
 					screen: E_APP_BOTTOM_TAB_NAVIGATION.HOME
 				})
 			} catch (_) {
@@ -270,8 +270,9 @@ const TransactionForm = memo(() => {
 						render={({ field: { onChange, value } }) => {
 							return (
 								<AppFileUpload
+									isMultiple
 									files={value}
-									onChangeFile={onChange}
+									onChangeFiles={onChange}
 									error={errors.responsiblePerson}
 									inputLabel={'transaction.form.files'}
 								/>

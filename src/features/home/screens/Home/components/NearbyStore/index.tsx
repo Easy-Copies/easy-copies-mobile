@@ -18,13 +18,16 @@ import { useLazyStore_indexQuery } from '@/features/store/redux'
 import { useNavigation } from '@react-navigation/native'
 
 // Types
-import { THomeProps } from '@/features/home/screens/Home/types'
+import { THomeScreenProps } from '@/features/home/screens/Home/types'
 
 // Constants
 import {
 	E_APP_STACK_NAVIGATION,
 	E_STORE_STACK_NAVIGATION
 } from '@/features/app/constants'
+
+// React Native Responsive Screen
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 const HomeNearbyStore = memo(() => {
 	// i18n
@@ -34,21 +37,21 @@ const HomeNearbyStore = memo(() => {
 	const [getStoreList, { data: storeList }] = useLazyStore_indexQuery()
 
 	// Navigation
-	const navigation = useNavigation<THomeProps['navigation']>()
+	const navigation = useNavigation<THomeScreenProps['navigation']>()
 
 	// Do when first came to this component
 	useEffect(() => {
-		getStoreList()
+		getStoreList({}, false)
 	}, [getStoreList])
 
 	return (
-		<AppView marginTop={'30px'} marginBottom={'30px'}>
+		<AppView marginBottom={'30px'}>
 			{/* Title */}
 			<AppView
 				flexDirection={'row'}
 				alignItems={'center'}
 				justifyContent={'space-between'}
-				marginBottom={'10px'}
+				marginBottom={'20px'}
 			>
 				<AppText
 					fontSize={20}
@@ -77,14 +80,32 @@ const HomeNearbyStore = memo(() => {
 
 			{/* Store List */}
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-				{storeList?.result?.rows?.map(row => (
-					<StyledStoreCard marginRight={'15px'} key={row.id}>
+				{storeList?.result?.rows?.map((row, index) => (
+					<StyledStoreCard
+						marginRight={
+							storeList?.result?.rows?.length - 1 === index ? undefined : '15px'
+						}
+						key={row.id}
+						onPress={() =>
+							navigation.navigate(E_APP_STACK_NAVIGATION.STORE, {
+								screen: E_STORE_STACK_NAVIGATION.STORE_DETAIL,
+								params: {
+									id: row.id,
+									name: row.name
+								}
+							})
+						}
+						height={hp('10%')}
+					>
 						<AppView
 							flexDirection={'row'}
 							justifyContent={'center'}
 							alignItems={'center'}
 						>
-							<StyledStorePhoto />
+							<StyledStorePhoto
+								alt={row.name}
+								source={{ uri: row.storePhoto }}
+							/>
 
 							<AppView flex={1} marginLeft={10}>
 								<AppText
@@ -93,6 +114,7 @@ const HomeNearbyStore = memo(() => {
 									fontWeight={'700'}
 									color={'primary.400'}
 									marginBottom={'2px'}
+									numberOfLines={1}
 								>
 									{row.name}
 								</AppText>
@@ -101,8 +123,14 @@ const HomeNearbyStore = memo(() => {
 									lineHeight={15}
 									fontWeight={'500'}
 									color={'primary.400'}
+									numberOfLines={2}
+									marginTop={'2px'}
+									marginBottom={'2px'}
 								>
 									{row.address}
+								</AppText>
+								<AppText fontSize={8} lineHeight={15} fontWeight={'500'}>
+									{row.isOpen ? 'Buka' : 'Tutup'} | 06:00 - 18:00
 								</AppText>
 							</AppView>
 						</AppView>

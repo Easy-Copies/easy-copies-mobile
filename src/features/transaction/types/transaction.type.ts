@@ -1,4 +1,5 @@
 // Types
+import { TAppFile } from '@/features/app/types'
 import { EStoreServiceName } from '@/features/store/children/store-service/types/store-service.type'
 
 export interface ITransaction {
@@ -32,7 +33,7 @@ export interface ITransaction {
 	paperType: string
 	inkType: string
 	sheetLength: number
-	pickupDate: Date
+	pickupDate: string
 	responsiblePerson: string
 	files: {
 		name: string
@@ -44,8 +45,8 @@ export interface ITransaction {
 	totalPrice: number
 	status: ETransactionApprovalStatus
 	userId: string
-	createdAt: Date
-	updatedAt: Date
+	createdAt: string
+	updatedAt: string
 }
 
 export enum ETransactionApprovalStatus {
@@ -72,4 +73,22 @@ export type TTransactionForm = {
 		size: number
 		file: string
 	}[]
+}
+
+export type TTransactionPayForm = {
+	senderName: string
+	bankName: string
+	accountNumber: string
+	file: TAppFile | null
+}
+
+export type TTransactionPayment = {
+	id: string
+	userId: string
+	transactionId: string
+	senderName: string
+	bankName: string
+	accountNumber: string
+	file: TAppFile
+	createdAt: string
 }

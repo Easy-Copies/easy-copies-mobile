@@ -2,11 +2,13 @@
 import {
 	ITransactionAttrsIndex,
 	ITransactionAttrsStore,
-	ITransactionAttrsShow
+	ITransactionAttrsShow,
+	ITransactionAttrsPay
 } from '@/features/transaction/types/attrs.type'
 import {
 	ITransactionResponseList,
-	ITransactionResponseDetail
+	ITransactionResponseDetail,
+	ITransactionPaymentResponseDetail
 } from '@/features/transaction/types/response.type'
 
 // Rtk
@@ -24,7 +26,26 @@ export const transactionApi = emptySplitApi.injectEndpoints({
 			query: payload => ({
 				url: 'v1/transactions',
 				params: payload?.params
-			})
+			}),
+			transformResponse: (
+				response: ITransactionResponseList
+			): ITransactionResponseList => {
+				return {
+					...response,
+					result: {
+						...response.result,
+						rows: response.result.rows.map(row => ({
+							...row,
+							pickupDate: moment(row.pickupDate)
+								.format('DD MMMM YYYY - HH:mm')
+								.toString(),
+							createdAt: moment(row.createdAt)
+								.format('DD MMMM YYYY - HH:mm')
+								.toString()
+						}))
+					}
+				}
+			}
 		}),
 		transaction_show: builder.query<
 			ITransactionResponseDetail,
@@ -44,6 +65,16 @@ export const transactionApi = emptySplitApi.injectEndpoints({
 					pickupDate: moment(payload.body.pickupDate).toISOString()
 				}
 			})
+		}),
+		transaction_pay: builder.mutation<
+			ITransactionPaymentResponseDetail,
+			ITransactionAttrsPay
+		>({
+			query: payload => ({
+				url: `v1/transactions/payments/${payload.params.transactionId}`,
+				method: 'POST',
+				body: payload.body
+			})
 		})
 	}),
 	overrideExisting: false
@@ -52,5 +83,6 @@ export const transactionApi = emptySplitApi.injectEndpoints({
 export const {
 	useLazyTransaction_indexQuery,
 	useLazyTransaction_showQuery,
-	useTransaction_storeMutation
+	useTransaction_storeMutation,
+	useTransaction_payMutation
 } = transactionApi

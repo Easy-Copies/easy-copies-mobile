@@ -81,10 +81,16 @@ const baseQueryWithReAuth: BaseQueryFn<
 
 					// retry the initial query
 					result = await baseQuery(args, api, extraOptions)
+
+					if (result.error?.status === 401) {
+						api.dispatch(auth_HANDLE_LOGOUT())
+					}
 				} else {
 					api.dispatch(auth_HANDLE_LOGOUT())
 				}
 			} catch (_) {
+				console.log('CATCH')
+
 				api.dispatch(auth_HANDLE_LOGOUT())
 			} finally {
 				// release must be called once the mutex should be released again.

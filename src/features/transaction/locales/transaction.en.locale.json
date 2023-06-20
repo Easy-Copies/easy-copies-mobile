@@ -9,6 +9,12 @@
 			"responsiblePerson": "Responsible Person",
 			"description": "Description (Optional)",
 			"files": "Files"
+		},
+		"formPay": {
+			"senderName": "Sender Name",
+			"bankName": "Bank Name",
+			"accountNumber": "Account Number",
+			"photoUpload": "Photo Upload"
 		}
 	}
 }

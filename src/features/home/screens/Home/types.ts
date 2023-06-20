@@ -13,7 +13,7 @@ import {
 } from '@/features/app/navigations'
 import { THomeStackNavigationParams } from '@/features/home/navigations'
 
-export type THomeProps = CompositeScreenProps<
+export type THomeScreenProps = CompositeScreenProps<
 	NativeStackScreenProps<
 		THomeStackNavigationParams,
 		E_HOME_STACK_NAVIGATION.HOME

@@ -1,5 +1,5 @@
 // React
-import { memo, useEffect } from 'react'
+import { memo, useCallback, useEffect } from 'react'
 
 // Components
 import {
@@ -32,10 +32,23 @@ const StoreListScreen = memo(() => {
 	// Navigation
 	const navigation = useNavigation<TStoreListScreenProps['navigation']>()
 
+	/**
+	 * @description Fetch store list
+	 *
+	 * @return {Promise<void>} Promise<void>
+	 */
+	const fetchStoreList = useCallback(async (): Promise<void> => {
+		try {
+			await getStoreList({}, false).unwrap()
+		} catch (_) {
+			//
+		}
+	}, [getStoreList])
+
 	// Do when user came to this component
 	useEffect(() => {
-		getStoreList()
-	}, [getStoreList])
+		fetchStoreList()
+	}, [fetchStoreList])
 
 	return (
 		<AppWrapper>
@@ -60,7 +73,10 @@ const StoreListScreen = memo(() => {
 								justifyContent={'center'}
 								alignItems={'center'}
 							>
-								<StyledStorePhoto />
+								<StyledStorePhoto
+									alt={item.name}
+									source={{ uri: item.storePhoto }}
+								/>
 
 								<AppView flex={1} marginLeft={10}>
 									<AppText

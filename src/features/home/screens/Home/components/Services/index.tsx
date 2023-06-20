@@ -11,9 +11,24 @@ import { StyledImage, StyledServiceCard } from './components/Styled'
 // Native Base
 import { FlatList, Row } from 'native-base'
 
+// React Navigation
+import { useNavigation } from '@react-navigation/native'
+
+// Types
+import { THomeScreenProps } from '@/features/home/screens/Home/types'
+
+// Constants
+import {
+	E_APP_STACK_NAVIGATION,
+	E_STORE_STACK_NAVIGATION
+} from '@/features/app/constants'
+
 const HomeServices = memo(() => {
 	// Translator
 	const { t } = useTranslation()
+
+	// Navigation
+	const navigation = useNavigation<THomeScreenProps['navigation']>()
 
 	// Common State
 	const services = useMemo((): {
@@ -74,7 +89,15 @@ const HomeServices = memo(() => {
 					keyExtractor={item => item.id.toString()}
 					scrollEnabled={false}
 					renderItem={({ item }) => (
-						<StyledServiceCard justifyContent={'center'} width={'48%'}>
+						<StyledServiceCard
+							justifyContent={'center'}
+							width={'48%'}
+							onPress={() =>
+								navigation.navigate(E_APP_STACK_NAVIGATION.STORE, {
+									screen: E_STORE_STACK_NAVIGATION.STORE_LIST
+								})
+							}
+						>
 							<StyledImage
 								source={item.image}
 								{...item.imageStyle}

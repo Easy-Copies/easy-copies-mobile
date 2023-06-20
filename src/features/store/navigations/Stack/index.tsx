@@ -30,7 +30,6 @@ const StoreStackNavigation = (): JSX.Element => {
 					header: props => {
 						return (
 							<AppNavigationHeader
-								isFromSomeWhere={props?.back !== undefined}
 								title={t('store.storeList')}
 								navigation={props.navigation}
 							/>
@@ -46,11 +45,7 @@ const StoreStackNavigation = (): JSX.Element => {
 						const { name } = props.route.params as { name: string }
 
 						return (
-							<AppNavigationHeader
-								isFromSomeWhere={props?.back !== undefined}
-								title={name}
-								navigation={props.navigation}
-							/>
+							<AppNavigationHeader title={name} navigation={props.navigation} />
 						)
 					}
 				}}
