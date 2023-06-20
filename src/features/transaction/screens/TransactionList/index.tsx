@@ -26,6 +26,9 @@ import { ETransactionApprovalStatus } from '@/features/transaction/types'
 // Redux
 import { useLazyTransaction_indexQuery } from '@/features/transaction/redux'
 
+// React Native Responsive
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+
 const TransactionListScreen = memo(() => {
 	// Common State
 	const [currentTransactionStatus, setCurrentTransactionStatus] = useState<
@@ -193,7 +196,7 @@ const TransactionListScreen = memo(() => {
 													<AppButton
 														backgroundColor={'primary.400'}
 														width={'150px'}
-														height={'30px'}
+														height={hp('4%')}
 														_text={{
 															fontSize: '10px'
 														}}

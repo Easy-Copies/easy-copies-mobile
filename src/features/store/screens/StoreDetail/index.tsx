@@ -54,8 +54,8 @@ const StoreDetailScreen = memo(
 
 		// Do when user came firs to this component
 		useEffect(() => {
-			getStoreDetail({ params: { id: route.params.id } })
-			getStoreServiceList({ params: { storeId: route.params.id } })
+			getStoreDetail({ params: { id: route.params.id } }, false)
+			getStoreServiceList({ params: { storeId: route.params.id } }, false)
 		}, [getStoreDetail, getStoreServiceList, route.params.id])
 
 		return (

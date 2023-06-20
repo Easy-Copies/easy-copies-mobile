@@ -5,12 +5,17 @@ import styled from 'styled-components'
 import { AppView } from '@/features/app/components'
 
 // React Native
-import { Dimensions } from 'react-native'
 import { Image } from 'native-base'
+
+// React Native Responsive
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+
+// React Native
+import { Platform } from 'react-native'
 
 export const StyledWrapper = styled(AppView)`
 	background-color: ${props => props.theme.colors.primary};
-	height: ${() => Dimensions.get('screen').width / 3.3}px;
+	height: ${() => (Platform.OS === 'android' ? hp('15%') : hp('20%'))};
 	padding-left: 35px;
 	padding-right: 35px;
 	border-bottom-left-radius: 50px;

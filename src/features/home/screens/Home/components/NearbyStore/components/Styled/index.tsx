@@ -6,10 +6,11 @@ import { Image, Pressable } from 'native-base'
 
 export const StyledStoreCard = styled(Pressable)`
 	background-color: ${props => props.theme.colors.lightBlue};
-	height: 80px;
 	border-radius: 10px;
 	width: 209px;
 	padding: 10px;
+	align-items: center;
+	justify-content: center;
 `
 
 export const StyledStorePhoto = styled(Image)`
