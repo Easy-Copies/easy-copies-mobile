@@ -39,7 +39,7 @@ const AppAlertDialog = memo(
 						<AlertDialog.Body>{children || description}</AlertDialog.Body>
 						<AlertDialog.Footer>
 							<Button.Group space={2}>
-								{!noCancelButton ? (
+								{!noCancelButton && !isYesLoading ? (
 									<AppButton
 										variant='unstyled'
 										colorScheme='coolGray'

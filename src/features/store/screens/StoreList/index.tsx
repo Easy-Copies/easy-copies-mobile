@@ -8,7 +8,11 @@ import {
 	AppView,
 	AppWrapper
 } from '@/features/app/components'
-import { StyledStoreCard, StyledStorePhoto } from './components'
+import {
+	StyledStoreCard,
+	StyledStorePhoto,
+	StyledStoreStar
+} from './components'
 
 // Native Base
 import { FlatList } from 'native-base'
@@ -24,6 +28,7 @@ import { TStoreListScreenProps } from '@/features/store/screens/StoreList/types'
 
 // Constants
 import { E_STORE_STACK_NAVIGATION } from '@/features/app/constants'
+import { StoreSearch } from './components/Search'
 
 const StoreListScreen = memo(() => {
 	// RTK
@@ -53,6 +58,8 @@ const StoreListScreen = memo(() => {
 	return (
 		<AppWrapper>
 			<AppContainer>
+				<StoreSearch />
+
 				<FlatList
 					flex={1}
 					data={storeList?.result?.rows || []}
@@ -93,9 +100,34 @@ const StoreListScreen = memo(() => {
 										lineHeight={15}
 										fontWeight={'500'}
 										color={'primary.400'}
+										numberOfLines={2}
+										marginTop={'2px'}
+										marginBottom={'2px'}
 									>
 										{item.address}
 									</AppText>
+									<AppView
+										alignItems={'center'}
+										justifyContent={'space-between'}
+										flexDirection={'row'}
+									>
+										<AppView>
+											<AppText fontSize={8} lineHeight={15} fontWeight={'500'}>
+												<AppText color={item.isOpen ? 'green.400' : 'red.400'}>
+													{item.isOpen ? 'Buka' : 'Tutup'}
+												</AppText>
+												<AppText> | </AppText>
+												<AppText>06:00 - 18:00</AppText>
+											</AppText>
+										</AppView>
+
+										<AppView flexDirection={'row'} alignItems={'center'}>
+											<StyledStoreStar />
+											<AppText fontSize={8} marginLeft={1}>
+												4.8
+											</AppText>
+										</AppView>
+									</AppView>
 								</AppView>
 							</AppView>
 						</StyledStoreCard>

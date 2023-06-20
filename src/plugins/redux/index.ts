@@ -61,7 +61,8 @@ const store = configureStore({
 			}
 		})
 			.prepend(listenerMiddleware.middleware)
-			.concat(middlewareError, emptySplitApi.middleware)
+			.concat(middlewareError)
+			.concat(emptySplitApi.middleware)
 
 		// Flipper debugger (for development purpose only)
 		if (NODE_ENV !== 'test' && NODE_ENV === 'development') {

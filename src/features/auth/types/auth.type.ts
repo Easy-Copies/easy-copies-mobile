@@ -2,15 +2,13 @@
 import { E_AUTH_SIGN_TYPE } from '@/features/auth/constants'
 
 export interface IAuthPermission {
-	permissionCode: string
+	code: string
 	actions: {
-		created: boolean
+		create: boolean
 		read: boolean
 		update: boolean
 		delete: boolean
 	}
-	createdAt: string
-	updatedAt: string
 }
 
 export interface IAuthRole {
