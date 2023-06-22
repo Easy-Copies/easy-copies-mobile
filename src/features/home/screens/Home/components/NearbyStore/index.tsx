@@ -41,7 +41,7 @@ const HomeNearbyStore = memo(() => {
 
 	// Do when first came to this component
 	useEffect(() => {
-		getStoreList({}, false)
+		getStoreList()
 	}, [getStoreList])
 
 	return (

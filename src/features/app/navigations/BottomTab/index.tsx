@@ -7,27 +7,25 @@ import { HomeStackNavigation } from '@/features/home/navigations'
 // Transaction Navigation
 import { TransactionStackNavigation } from '@/features/transaction/navigations'
 
-// i18n
-import { useTranslation } from 'react-i18next'
-
 // Interfaces
 import { TAppBottomTabNavigationParams } from './types'
 
 // Constants
 import { E_APP_BOTTOM_TAB_NAVIGATION } from '@/features/app/constants'
 
+// Components
+import { StyledHomeImage, StyledHistoryImage } from './components'
+
 const BottomTab = createBottomTabNavigator<TAppBottomTabNavigationParams>()
 const AppBottomTabNavigation = (): JSX.Element => {
-	// Translation
-	const { t } = useTranslation()
-
 	return (
 		<BottomTab.Navigator>
 			<BottomTab.Screen
 				name={E_APP_BOTTOM_TAB_NAVIGATION.HOME}
 				component={HomeStackNavigation}
 				options={{
-					title: t('app.menu.home') as string,
+					tabBarLabel: () => null,
+					tabBarIcon: ({ focused }) => <StyledHomeImage isActive={focused} />,
 					headerShown: false
 				}}
 			/>
@@ -35,7 +33,10 @@ const AppBottomTabNavigation = (): JSX.Element => {
 				name={E_APP_BOTTOM_TAB_NAVIGATION.TRANSACTION}
 				component={TransactionStackNavigation}
 				options={{
-					title: t('app.menu.transaction') as string,
+					tabBarLabel: () => null,
+					tabBarIcon: ({ focused }) => (
+						<StyledHistoryImage isActive={focused} />
+					),
 					headerShown: false
 				}}
 			/>
