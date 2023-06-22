@@ -19,7 +19,7 @@ export const StyledWrapper = styled(AppView)`
 	font-weight: 600;
 	line-height: 25px;
 	color: #fff;
-	height: ${() => (Platform.OS === 'android' ? hp('7%') : hp('12%'))};
+	height: ${() => (Platform.OS === 'android' ? hp('7%') : hp('12%'))}px;
 	padding-top: ${() => (Platform.OS === 'android' ? '12px' : '20px')};
 `
 

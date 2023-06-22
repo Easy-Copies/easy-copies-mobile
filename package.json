@@ -39,7 +39,7 @@
 		"i18next": "^22.4.11",
 		"lodash.omit": "^4.5.0",
 		"moment": "^2.29.4",
-		"native-base": "^3.4.28",
+		"native-base": "3.4.25",
 		"react": "18.2.0",
 		"react-hook-form": "^7.43.7",
 		"react-i18next": "^12.2.0",

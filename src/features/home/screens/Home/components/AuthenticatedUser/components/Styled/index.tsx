@@ -15,7 +15,7 @@ import { Platform } from 'react-native'
 
 export const StyledWrapper = styled(AppView)`
 	background-color: ${props => props.theme.colors.primary};
-	height: ${() => (Platform.OS === 'android' ? hp('15%') : hp('20%'))};
+	height: ${() => (Platform.OS === 'android' ? hp('15%') : hp('20%'))}px;
 	padding-left: 35px;
 	padding-right: 35px;
 	border-bottom-left-radius: 50px;
